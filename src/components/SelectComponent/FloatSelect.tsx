@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";         // Added useEffect - Sherin
 import { Select } from "antd";
 import cssStyles from "./selectoption.module.css";
-import PosStyles from "@/app/dashboard/(retail)/retail-pos/PosStyles";
 import { UpArrow } from "../Svg/UpArrow";
 import { DownArrow } from "../Svg/DownArrow";
 
@@ -42,7 +41,6 @@ const FloatingLabelSelect: React.FC<FloatingLabelSelectInterface> = ({
   onBlur,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const { styles } = PosStyles.useStyle();
 
 
   // Dark Mode Changes - Sherin
@@ -112,7 +110,7 @@ const FloatingLabelSelect: React.FC<FloatingLabelSelectInterface> = ({
         }
         onDropdownVisibleChange={(open) => setIsFocused(open)}
         filterOption={filterOption}
-        className={`${cssStyles.floatingSelect} ${styles.customerSelect} ${value || isFocused ? cssStyles.filled : ""
+        className={`${cssStyles.floatingSelect} ${value || isFocused ? cssStyles.filled : ""
           }`}
         // style={{
         //   backgroundColor: disabled ? "#f0f9fc" : "",                  // Sherin        

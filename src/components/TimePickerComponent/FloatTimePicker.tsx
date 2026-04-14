@@ -2,7 +2,6 @@ import React, { forwardRef, Ref } from "react";
 import { TimePicker } from "antd";
 import type { TimePickerProps } from "antd";
 import cssStyles from "./timepicker.module.css";
-import PosStyles from "@/app/dashboard/(retail)/retail-pos/PosStyles";
 import dayjs from "dayjs";
 
 const format = "h:mm A";
@@ -24,12 +23,10 @@ const FloatTimePicker = forwardRef(function FloatDatePickerWithRef(
   ref: Ref<any>
 ) {
   const [isFocused, setIsFocused] = React.useState(false);
-  const { styles } = PosStyles.useStyle();
   return (
     <div
-      className={`${cssStyles.floatingLabelContainer} ${
-        props.errormsg ? cssStyles.inputError : null
-      }`}
+      className={`${cssStyles.floatingLabelContainer} ${props.errormsg ? cssStyles.inputError : null
+        }`}
       style={{ width: props.widthInput }}
     >
       <TimePicker
@@ -42,12 +39,11 @@ const FloatTimePicker = forwardRef(function FloatDatePickerWithRef(
         variant="borderless"
         use12Hours
         format={"h:mm A"}
-        className={`${styles.customDatePicker} ${cssStyles.floatingDatepicker}`}
+      // className={`${styles.customDatePicker} ${cssStyles.floatingDatepicker}`}
       />
       <label
-        className={`${cssStyles.floatingLabel} ${
-          props.value || isFocused ? cssStyles.active : ""
-        }`}
+        className={`${cssStyles.floatingLabel} ${props.value || isFocused ? cssStyles.active : ""
+          }`}
       >
         {props.errormsg && !isFocused ? (
           <span style={{ color: "#e8bdb4" }}>{props.errormsg}</span>

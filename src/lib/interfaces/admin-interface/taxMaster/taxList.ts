@@ -1,7 +1,3 @@
-import {
-  PurchaseSlabInterface,
-  SalesSlabInterface,
-} from "@/app/_components/taxMasterComponents/taxform/constants";
 
 export interface TaxMaster {
   tax_code: number;
@@ -43,8 +39,8 @@ export interface TaxMaster {
   inventory_return_account_ledger_id: number;
   branch_id: number;
   company_id: number;
-  purchaseSlab: PurchaseSlabInterface[] | [];
-  salesSlab: SalesSlabInterface[] | [];
+  // purchaseSlab: PurchaseSlabInterface[] | [];
+  // salesSlab: SalesSlabInterface[] | [];
 }
 
 export interface GetPurchaseTaxLedgerList {
