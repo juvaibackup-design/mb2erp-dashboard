@@ -1,0 +1,292 @@
+{
+  "data": {
+    "periodMode": "MONTH",
+    "periods": [
+      { "key": "2026-01", "label": "Jan" },
+      { "key": "2026-02", "label": "Feb" },
+      { "key": "2026-03", "label": "Mar" }
+    ],
+    "sites": [
+      { "siteId": 1, "siteName": "HO" },
+      { "siteId": 2, "siteName": "Mumbai" },
+      { "siteId": 3, "siteName": "Chennai" }
+    ],
+    "data": [
+      {
+        "accountId": 1,
+        "name": "Assets",
+        "level": 1,
+        "periods": {
+          "2026-01": {
+            "consolidated": {
+              "opening": 8466800,
+              "perdr": 3799000,
+              "per.cr": 1895000,
+              "closing": 3799000
+            },
+            "sites": {
+              "1": {
+                "opening": 2082000,
+                "per.dr": 1625000,
+                "per.cr": 500000,
+                "closing": 1625000
+              },
+              "2": {
+                "opening": 1665600,
+                "per.dr": 1500000,
+                "per.cr": 350000,
+                "closing": 1500000
+              },
+              "3": {
+                "opening": 1249200,
+                "per.dr": 1550000,
+                "per.cr": 400000,
+                "closing": 1550000
+              }
+            }
+          },
+          "2026-02": {
+            "consolidated": {
+              "opening": 8523000,
+              "per.dr": 3801000,
+              "per.cr": 1900000,
+              "closing": 3801000
+            },
+            "sites": {
+              "1": {
+                "opening": 2100000,
+                "per.dr": 1650000,
+                "per.cr": 550000,
+                "closing": 1650000
+              },
+              "2": {
+                "opening": 1680000,
+                "per.dr": 1530000,
+                "per.cr": 370000,
+                "closing": 1530000
+              },
+              "3": {
+                "opening": 1253000,
+                "per.dr": 1500000,
+                "per.cr": 410000,
+                "closing": 1500000
+              }
+            }
+          },
+          "2026-03": {
+            "consolidated": {
+              "opening": 8650000,
+              "per.dr": 3840000,
+              "per.cr": 1920000,
+              "closing": 3840000
+            },
+            "sites": {
+              "1": {
+                "opening": 2150000,
+                "per.dr": 1685000,
+                "per.cr": 600000,
+                "closing": 1685000
+              },
+              "2": {
+                "opening": 1720000,
+                "per.dr": 1550000,
+                "per.cr": 380000,
+                "closing": 1550000
+              },
+              "3": {
+                "opening": 1280000,
+                "per.dr": 1600000,
+                "per.cr": 420000,
+                "closing": 1600000
+              }
+            }
+          }
+        },
+        "children": [
+          {
+            "accountId": 11,
+            "name": "Current Assets",
+            "level": 2,
+            "periods": {
+              "2026-01": {
+                "consolidated": {
+                  "opening": 2324100,
+                  "per.dr": 2324100,
+                  "per.cr": 0,
+                  "closing": 2324100
+                },
+                "sites": {
+                  "1": {
+                    "opening": 571500,
+                    "per.dr": 571500,
+                    "per.cr": 0,
+                    "closing": 571500
+                  },
+                  "2": {
+                    "opening": 457200,
+                    "per.dr": 457200,
+                    "per.cr": 0,
+                    "closing": 457200
+                  },
+                  "3": {
+                    "opening": 342900,
+                    "per.dr": 342900,
+                    "per.cr": 0,
+                    "closing": 342900
+                  }
+                }
+              },
+              "2026-02": {
+                "consolidated": {
+                  "opening": 2400000,
+                  "per.dr": 2400000,
+                  "per.cr": 0,
+                  "closing": 2400000
+                },
+                "sites": {
+                  "1": {
+                    "opening": 600000,
+                    "per.dr": 600000,
+                    "per.cr": 0,
+                    "closing": 600000
+                  },
+                  "2": {
+                    "opening": 470000,
+                    "per.dr": 470000,
+                    "per.cr": 0,
+                    "closing": 470000
+                  },
+                  "3": {
+                    "opening": 350000,
+                    "per.dr": 350000,
+                    "per.cr": 0,
+                    "closing": 350000
+                  }
+                }
+              },
+              "2026-03": {
+                "consolidated": {
+                  "opening": 2480000,
+                  "per.dr": 2480000,
+                  "per.cr": 0,
+                  "closing": 2480000
+                },
+                "sites": {
+                  "1": {
+                    "opening": 620000,
+                    "per.dr": 620000,
+                    "per.cr": 0,
+                    "closing": 620000
+                  },
+                  "2": {
+                    "opening": 490000,
+                    "per.dr": 490000,
+                    "per.cr": 0,
+                    "closing": 490000
+                  },
+                  "3": {
+                    "opening": 370000,
+                    "per.dr": 370000,
+                    "per.cr": 0,
+                    "closing": 370000
+                  }
+                }
+              }
+            }
+          },
+          {
+            "accountId": 12,
+            "name": "Fixed Assets",
+            "level": 2,
+            "periods": {
+              "2026-01": {
+                "consolidated": {
+                  "opening": 5551000,
+                  "per.dr": 5551000,
+                  "per.cr": 0,
+                  "closing": 5551000
+                },
+                "sites": {
+                  "1": {
+                    "opening": 1365000,
+                    "per.dr": 1365000,
+                    "per.cr": 0,
+                    "closing": 1365000
+                  },
+                  "2": {
+                    "opening": 1092000,
+                    "per.dr": 1092000,
+                    "per.cr": 0,
+                    "closing": 1092000
+                  },
+                  "3": {
+                    "opening": 819000,
+                    "per.dr": 819000,
+                    "per.cr": 0,
+                    "closing": 819000
+                  }
+                }
+              },
+              "2026-02": {
+                "consolidated": {
+                  "opening": 5600000,
+                  "per.dr": 5600000,
+                  "per.cr": 0,
+                  "closing": 5600000
+                },
+                "sites": {
+                  "1": {
+                    "opening": 1380000,
+                    "per.dr": 1380000,
+                    "per.cr": 0,
+                    "closing": 1380000
+                  },
+                  "2": {
+                    "opening": 1100000,
+                    "per.dr": 1100000,
+                    "per.cr": 0,
+                    "closing": 1100000
+                  },
+                  "3": {
+                    "opening": 820000,
+                    "per.dr": 820000,
+                    "per.cr": 0,
+                    "closing": 820000
+                  }
+                }
+              },
+              "2026-03": {
+                "consolidated": {
+                  "opening": 5650000,
+                  "per.dr": 5650000,
+                  "per.cr": 0,
+                  "closing": 5650000
+                },
+                "sites": {
+                  "1": {
+                    "opening": 1400000,
+                    "per.dr": 1400000,
+                    "per.cr": 0,
+                    "closing": 1400000
+                  },
+                  "2": {
+                    "opening": 1120000,
+                    "per.dr": 1120000,
+                    "per.cr": 0,
+                    "closing": 1120000
+                  },
+                  "3": {
+                    "opening": 830000,
+                    "per.dr": 830000,
+                    "per.cr": 0,
+                    "closing": 830000
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+.floatContainer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.floatContainerr {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  position: fixed;
+}
+.floatRoww {
+  pointer-events: auto; /* ✅ allow clicks on buttons inside */
+  background-color: #262626;
+  padding: 12px;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 1;
+  margin-bottom: 12px;
+  bottom: 0;
+  /* left: 40%; */
+  animation: floatFromBottom 1s ease-in-out forwards;
+}
+
+.floatRow {
+  background-color: #262626;
+  padding: 12px;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 1;
+  margin-bottom: 12px;
+  bottom: 0;
+  /* left: 40%; */
+  animation: floatFromBottom 1s ease-in-out forwards;
+}
+
+@keyframes floatFromBottom {
+  from {
+    bottom: -12px;
+  }
+  to {
+    bottom: 0;
+  }
+}
+
+.approvalButton {
+  background-color: #73d13d !important;
+  color: #141414 !important;
+}
+
+.holdButton {
+  background-color: #fff !important;
+  color: #141414 !important;
+}
+
+.deleteButton {
+  background-color: #f5222d !important;
+}
+.verifyButton {
+  background-color: rgb(250, 173, 20) !important;
+  color: #141414 !important;
+}
+
+.modifyPrint {
+  background-color: #9ce5ae !important;
+  color: #141414 !important;
+  width: 146px !important;
+  height: 40px !important;
+}
+.modifyDelete {
+  background-color: #ffa09b !important;
+  color: #141414 !important;
+  width: 146px !important;
+  height: 40px !important;
+}
+.copyBtn {
+  background-color: blue !important;
+  color: #fff !important;
+  width: 146px !important;
+  height: 40px !important;
+}
+
+.voidBtn {
+  background-color: #ffffff !important;
+  color: #000 !important;
+  width: 146px !important;
+  height: 40px !important;
+}
+.partiallyPay {
+  color: #141414 !important;
+  background: rgb(255 168 0) !important;
+}

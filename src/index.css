@@ -1,0 +1,11 @@
+/* @import "@webdatarocks/webdatarocks/webdatarocks.css"; */
+
+@media print {
+  /* Override any mobile-specific styles for printing */
+
+  /* Ensure the layout stays consistent */
+  body {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}

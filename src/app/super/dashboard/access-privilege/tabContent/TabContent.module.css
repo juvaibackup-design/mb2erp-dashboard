@@ -1,0 +1,131 @@
+/* .tabItem {
+  max-width: 200px;          
+  white-space: normal;       
+  word-wrap: break-word;     
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;   
+  display: inline-block;  
+  text-align: left;
+  padding-left: 0;   
+  hyphens: auto;
+} */
+
+.tabItem {
+  white-space: nowrap; /* Prevent text wrap for specific label items */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Ellipsis for overflowed text */
+}
+
+/* styles.module.css or styles.css */
+.header {
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 135px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header1 {
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 10px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* 
+.drawerTableHeader {
+  display: flex;
+  gap: 130px;
+} */
+
+/* styles.module.css or styles.css */
+.headerContainer {
+  /* background-color: #fafafa; */
+  background-color: #ededed;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  /* margin-left: -10px; */
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.ColumnField {
+  margin-top: 22px;
+}
+
+.headerCheckbox {
+  margin-left: 13px;
+}
+
+.freezeHeader {
+  display: flex;
+  width: 20px;
+  gap: 22px;
+  margin-bottom: -20px;
+}
+
+.freezeLeft {
+  /* margin-left: 248px; */
+  margin-left: 200px;
+  color: #1677ff;
+}
+
+.freezeRight {
+  color: #1677ff;
+}
+
+.form {
+  height: 100% !important;
+  /* margin-top: -20px !important; */
+}
+.form1 {
+  /* height: 100% !important; */
+  height: 470px !important;
+}
+
+.infoIcon {
+  color: #1677ff !important;
+  cursor: pointer;
+}
+
+/* .topHead {
+  display: flex;
+  justify-content: space-between;
+} */
+
+.tableheaderCol {
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 10px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tableheaderPoss {
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 65px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tableheaderEdit {
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 15px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

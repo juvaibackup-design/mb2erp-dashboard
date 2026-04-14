@@ -1,0 +1,14 @@
+.tabContentHeader {
+  width: 100%;
+  background-color: #F5F5F5;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  align-items: center;
+  
+}
+
+.wrapper {
+  display: flex;
+  gap: 0.5rem;
+}

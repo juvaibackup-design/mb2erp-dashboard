@@ -1,0 +1,64 @@
+.mainContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.loginBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.registerBox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+
+.carousal {
+  width: 50%;
+  height: 100%;
+}
+.text {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.01px;
+  color: #262626;
+  text-align: center;
+}
+.img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+.padd {
+  margin: 0 auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+/******new coding**********/
+@media (min-width: 320px) and (max-width: 768px) {
+  .carousal {
+    display: none;
+  }
+  .loginBox {
+    width: 100%;
+    /* position: relative; */
+    /* top: 150px; */
+  }
+  .registerBox {
+    width: 100%;
+    height: auto;
+  }
+}

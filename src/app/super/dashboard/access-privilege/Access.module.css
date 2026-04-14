@@ -1,0 +1,118 @@
+.title {
+  display: inline-block;
+  width: 200px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px;
+  padding: 1rem;
+  background-color: #fafafa;
+  white-space: pre-wrap;
+}
+
+.wrapper {
+  position: absolute;
+}
+
+.alignCheckbox {
+  position: relative;
+  bottom: 10px;
+}
+
+.formWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subLayout {
+  height: calc(100% - 70px);
+}
+
+.mobileSubLayout {
+  height: calc(100% - 120px);
+  overflow: auto;
+}
+.mobileAddonSubLayout {
+  height: calc(100% - 100px);
+  overflow: auto;
+}
+.footer {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.addOnfooter {
+  height: 70px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 28px;
+  @media (min-width: 320px) and (max-width: 768px) {
+    height: 50px;
+    padding-top: 10px;
+  }
+}
+.create_access_header {
+  max-height: 60px;
+  height: 100%;
+}
+
+.create_access_tabs {
+  height: calc(100% - 60px);
+  overflow: auto;
+}
+
+.role_cancel_button {
+  display: none !important;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .role_cancel_button {
+    display: inline-flex !important;
+    color: red !important;
+  }
+}
+
+.tabItem {
+  max-width: 158px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+  text-overflow: ellipsis;
+  display: inline-block;
+  text-align: left;
+  padding-left: 0;
+  hyphens: auto;
+}
+
+/* Dark Mode Changes */
+
+:global(.dark-mode) .title {
+  display: inline-block;
+  width: 200px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px;
+  padding: 1rem;
+  background-color: #222222;
+  white-space: pre-wrap;
+}
+
+
+.content {
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  padding-bottom: 70px; 
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 70px;
+  padding: 12px 24px;
+  z-index: 1000;
+}

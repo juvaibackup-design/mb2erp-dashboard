@@ -1,0 +1,84 @@
+.modalHeader {
+  padding-bottom: 16px;
+  width: 100%;
+}
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cancelButton {
+  position: absolute;
+  top: 2.1rem;
+  left: 23rem;
+  clip-path: polygon(0% 0%, 70% 0%, 100% 100%, 100% 100%, 0% 100%);
+}
+.desc {
+  color: #595959;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+.title {
+  color: #141414 !important;
+  font-size: 18px !important;
+  font-style: normal;
+}
+
+.header {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 150%;
+  text-align: center;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.hide {
+  visibility: hidden;
+}
+.groupButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 0.6rem;
+}
+
+.yesButton {
+  width: 50%;
+  color: var(--red-primary) !important;
+  border: 1px solid var(--red-primary) !important;
+  font-size: 14px;
+  font-family: "__chivo_a768de";
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  padding: 4px 0.9rem;
+  border-radius: 5px;
+}
+.noButton {
+  width: 50%;
+  color: #0d39fe;
+  font-size: 14px;
+  font-family: "__chivo_a768de";
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  color: #fff;
+  padding: 4px 0.9rem;
+  border-radius: 5px;
+}
+.cancel_button {
+  display: none !important;
+}
+
+/******new coding for mobile responsive*******/
+@media (min-width: 320px) and (max-width: 767px) {
+  .cancel_button {
+    display: flex !important;
+    color: #f5222d !important;
+  }
+}

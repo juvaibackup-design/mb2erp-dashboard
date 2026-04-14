@@ -1,0 +1,48 @@
+.inputToggler {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.inputWrap {
+  display: flex;
+  border: 2px solid rgb(212, 218, 220);
+  border-radius: 10px;
+  width: 100px;
+  color: rgb(74, 98, 103);
+  justify-content: space-between;
+  padding-block: 0.1rem;
+  padding-inline: 0.25rem;
+}
+
+.input {
+  border: none;
+  outline: none;
+  text-align: center;
+  background-color: transparent;
+  width: 3ch;
+}
+
+/* Hide arrows in Chrome, Safari, Edge, and Opera */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide arrows in Firefox */
+.input {
+  -moz-appearance: textfield;
+}
+
+/* Dark Mode Changes - Sherin */
+
+:global(.dark-mode) .input {
+  border: none;
+  outline: none;
+  text-align: center;
+  background-color: transparent;
+  width: 3ch;
+  color: #fff;
+}

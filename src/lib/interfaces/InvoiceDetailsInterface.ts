@@ -1,0 +1,22 @@
+export type InvoiceDetailsType = {
+  type?: string;
+  seq_no: number;
+  id: number;
+  invoice_no: string;
+  invoice_date: string;
+  supplier_id: string;
+  supplier_name: string;
+  doc_no: any;
+  doc_date: any | null;
+  against_no: any | null;
+  against_date: any | null;
+  net_amount: number;
+  status: string;
+  status_flag: number;
+  stock_point: number;
+  stockpoint_name: string;
+  created_name: string | null;
+  quantity: number;
+  isAgainst: boolean;
+  againstNo: any;
+};

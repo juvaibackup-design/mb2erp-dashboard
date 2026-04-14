@@ -1,0 +1,37 @@
+.font {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 10px */
+  letter-spacing: 0.007px;
+  margin: 4px 0;
+}
+.flexCentered {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.analytics {
+  width: 100%;
+  padding: 8px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  border-radius: 4px;
+}
+.insightName {
+  font-size: 12x;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 0;
+}
+.insightAmout {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 4px 0;
+}
+.padding {
+  padding: 4px 0;
+}

@@ -1,0 +1,237 @@
+{
+  "reportType": "PROFIT_AND_LOSS",
+  "currency": "USD",
+  "sites": [{ "key": "site1", "label": "site-1" }],
+  "rows": [
+    {
+      "path": ["Revenue"],
+      "consolidated": 1815000,
+      "site1": 1575000,
+      "site2": 945000,
+      "site3": 525000
+    },
+    {
+      "path": ["Revenue", "Product Sales"],
+      "consolidated": 1575000,
+      "site1": 1575000,
+      "site2": 945000,
+      "site3": 525000
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Retail Sales"],
+      "consolidated": 945000,
+      "site1": 945000,
+      "site2": 945000,
+      "site3": 945000
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Retail Sales", "In-Store Sales"],
+      "consolidated": 525000,
+      "site1": 525000,
+      "site2": 525000,
+      "site3": 525000
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Retail Sales",
+        "In-Store Sales",
+        "Invoice Payment"
+      ],
+      "consolidated": 52500,
+      "site1": 52500,
+      "site2": 52500,
+      "site3": 52500
+      
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Retail Sales",
+        "In-Store Sales",
+        "Wire Transfer"
+      ],
+      "consolidated": 59062.5,
+      "site1": 59062.5,
+      "site2": 59062.5,
+      "site3": 59062.5
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Retail Sales",
+        "In-Store Sales",
+        "Direct Deposit"
+      ],
+      "consolidated": 65625,
+      "site1": 65625,
+      "site2": 65625,
+      "site3": 65625
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Retail Sales",
+        "In-Store Sales",
+        "Check Payment"
+      ],
+      "consolidated": 72187.5,
+      "site1": 72187.5,
+      "site2": 72187.5,
+      "site3": 72187.5
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Retail Sales",
+        "In-Store Sales",
+        "ACH Transfer"
+      ],
+      "consolidated": 78750,
+      "site1": 78750,
+      "site2": 78750,
+      "site3": 78750
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Retail Sales",
+        "In-Store Sales",
+        "Credit Card Payment"
+      ],
+      "consolidated": 59250,
+      "site1": 59250,
+      "site2": 59250,
+      "site3": 59250
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Retail Sales",
+        "In-Store Sales",
+        "Cash Deposit"
+      ],
+      "consolidated": 59250,
+      "site1": 59250,
+      "site2": 59250,
+      "site3": 59250
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Retail Sales",
+        "In-Store Sales",
+        "Bank Transfer"
+      ],
+      "consolidated": 66562.5,
+      "site1": 66562.5,
+      "site2": 66562.5,
+      "site3": 66562.5
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Online Sales"],
+      "consolidated": 420000,
+      "site1": 420000,
+      "site2": 420000,
+      "site3": 420000
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Online Sales", "Invoice Payment"],
+      "consolidated": 48000,
+      "site1": 48000,
+      "site2": 48000,
+      "site3": 48000
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Online Sales", "Wire Transfer"],
+      "consolidated": 54000,
+      "site1": 54000,
+      "site2": 54000,
+      "site3": 54000
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Online Sales", "Direct Deposit"],
+      "consolidated": 60000,
+      "site1": 60000,
+      "site2": 60000,
+      "site3": 60000
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Online Sales", "Check Payment"],
+      "consolidated": 66000,
+      "site1": 66000,
+      "site2": 66000,
+      "site3": 66000
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Online Sales", "ACH Transfer"],
+      "consolidated": 72000,
+      "site1": 72000,
+      "site2": 72000,
+      "site3": 72000
+    },
+    {
+      "path": [
+        "Revenue",
+        "Product Sales",
+        "Online Sales",
+        "Credit Card Payment"
+      ],
+      "consolidated": 48000,
+      "site1": 48000,
+      "site2": 48000,
+      "site3": 48000
+    },
+    {
+      "path": ["Revenue", "Product Sales", "Online Sales", "Cash Deposit"],
+      "consolidated": 54000,
+      "site1": 54000,
+      "site2": 54000,
+      "site3": 54000
+    },
+
+    {
+      "path": ["Cost of Goods Sold"],
+      "consolidated": 828000,
+      "site1": 828000
+    },
+    {
+      "path": ["Gross Profit"],
+      "consolidated": 987000,
+      "site1": 987000
+    },
+    {
+      "path": ["Operating Expenses"],
+      "consolidated": 567000,
+      "site1": 567000
+    },
+    {
+      "path": ["Operating Profit"],
+      "consolidated": 420000,
+      "site1": 420000
+    },
+    {
+      "path": ["Other Income"],
+      "consolidated": 22050,
+      "site1": 22050
+    },
+    {
+      "path": ["Other Expenses"],
+      "consolidated": 22500,
+      "site1": 22500
+    },
+    {
+      "path": ["Net Profit"],
+      "consolidated": 419550,
+      "site1": 419550
+    }
+  ]
+}

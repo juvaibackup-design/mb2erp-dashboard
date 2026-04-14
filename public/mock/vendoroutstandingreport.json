@@ -1,0 +1,137 @@
+{
+  "asOnDate": "2025-12-29",
+  "currency": "USD",
+  "vendors": [
+    {
+      "vendorId": "VEND-001",
+      "vendorName": "Alpha Suppliers LLC",
+      "priority": "HIGH",
+      "categories": ["Electronics", "Parts"],
+
+      "agingSummary": {
+        "current": 27331,
+        "days_1_30": 41391,
+        "days_31_60": 0,
+        "days_61_90": 0,
+        "days_90_plus": 0,
+        "totalOutstanding": 68722
+      },
+
+      "bills": [
+        {
+          "billNo": "BILL-VEND-001-001",
+          "billDate": "2025-11-04",
+          "dueDate": "2025-12-04",
+          "amount": 45558,
+          "outstanding": 41391,
+          "agingBucket": "1-30",
+          "status": "Overdue 25 days",
+          "benefitPenalty": 517,
+          "stockAnalytics": false
+        },
+        {
+          "billNo": "BILL-VEND-001-002",
+          "billDate": "2025-12-14",
+          "dueDate": "2026-01-13",
+          "amount": 33133,
+          "outstanding": 27331,
+          "agingBucket": "Current",
+          "status": "Eligible for discount",
+          "benefitPenalty": -547,
+          "stockAnalytics": false
+        }
+      ]
+    },
+
+    {
+      "vendorId": "VEND-002",
+      "vendorName": "Beta Materials Inc",
+      "priority": "HIGH",
+      "categories": ["Electronics", "Parts"],
+
+      "agingSummary": {
+        "current": 0,
+        "days_1_30": 62838,
+        "days_31_60": 87731,
+        "days_61_90": 0,
+        "days_90_plus": 0,
+        "totalOutstanding": 150568
+      },
+
+      "bills": [
+        {
+          "billNo": "BILL-VEND-002-001",
+          "billDate": "2025-11-08",
+          "dueDate": "2025-12-08",
+          "amount": 63540,
+          "outstanding": 62838,
+          "agingBucket": "1-30",
+          "status": "Overdue 21 days",
+          "benefitPenalty": 660,
+          "stockAnalytics": false
+        },
+        {
+          "billNo": "BILL-VEND-002-002",
+          "billDate": "2025-10-04",
+          "dueDate": "2025-11-03",
+          "amount": 60124,
+          "outstanding": 55398,
+          "agingBucket": "31-60",
+          "status": "Overdue 56 days",
+          "benefitPenalty": 1551,
+          "stockAnalytics": true
+        }
+      ]
+    },
+
+    {
+      "vendorId": "VEND-003",
+      "vendorName": "Gamma Logistics",
+      "priority": "MEDIUM",
+      "categories": ["Electronics", "Parts", "Tools", "Materials"],
+
+      "agingSummary": {
+        "current": 23869,
+        "days_1_30": 0,
+        "days_31_60": 0,
+        "days_61_90": 55298,
+        "days_90_plus": 0,
+        "totalOutstanding": 79168
+      },
+
+      "bills": [
+        {
+          "billNo": "BILL-VEND-003-001",
+          "billDate": "2025-12-20",
+          "dueDate": "2026-01-19",
+          "amount": 27771,
+          "outstanding": 23869,
+          "agingBucket": "Current",
+          "status": "Eligible for discount",
+          "benefitPenalty": -477,
+          "stockAnalytics": false
+        },
+        {
+          "billNo": "BILL-VEND-003-002",
+          "billDate": "2025-09-23",
+          "dueDate": "2025-10-23",
+          "amount": 58858,
+          "outstanding": 55298,
+          "agingBucket": "61-90",
+          "status": "Overdue 67 days",
+          "benefitPenalty": 1852,
+          "stockAnalytics": false
+        }
+      ]
+    }
+  ],
+
+  "grandTotal": {
+    "current": 206401,
+    "days_1_30": 244407,
+    "days_31_60": 236082,
+    "days_61_90": 55298,
+    "days_90_plus": 0,
+    "totalOutstanding": 742189
+  }
+}

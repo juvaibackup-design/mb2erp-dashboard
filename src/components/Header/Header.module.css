@@ -1,0 +1,86 @@
+.container {
+  padding: 8px 0;
+  display: flex;
+  /* flex-direction: row; */
+  align-items: center;
+  justify-content: space-between;
+}
+.title{
+  color: #262626;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0;
+}
+.dropDownIcon {
+  color: #8c8c8c !important;
+  width: 20px;
+  height: 20px;
+}
+.description {
+  margin: 0;
+  color: #bfbfbf;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 18px */
+  letter-spacing: 0.072px;
+}
+.actionButton {
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 22px !important;
+  text-align: center !important;
+  width: 115px !important;
+}
+.cancel {
+  margin-right: 8px;
+  color: #f5222d !important;
+  line-height: 22px;
+}
+.cancel:hover {
+  background-color: transparent !important;
+}
+
+.button {
+  padding: 4px 1.5rem;
+}
+.btnArrow {
+  @media (min-width: 320px) and (max-width: 767px) {
+    padding: 4px 0px !important;
+  }
+}
+.slugDetail {
+  font-size: 12px;
+  color: "#bebebe";
+}
+
+
+
+ /* Dark Mode Changes - Sherin  */
+:global(.dark-mode) .title {
+  color: #ffffff !important;
+}
+
+:global(.dark-mode) .description {
+  color: #bfbfbf !important;
+}
+ 
+:global(.dark-mode) .container {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000000;
+}
+
+.header {
+  position: static !important;
+  height: auto !important;
+  width: auto !important;
+  background-color: transparent !important;
+  margin-left: 0.5rem;
+}

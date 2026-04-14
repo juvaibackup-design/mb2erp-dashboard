@@ -1,0 +1,24 @@
+{
+  "dataSource": {
+    "dataSourceType": "csv",
+    "filename": "https://cdn.webdatarocks.com/data/data.csv"
+  },
+  "slice": {
+    "rows": [
+      {
+        "uniqueName": "Category"
+      }
+    ],
+    "columns": [
+      {
+        "uniqueName": "Measures"
+      }
+    ],
+    "measures": [
+      {
+        "uniqueName": "Price",
+        "aggregation": "sum"
+      }
+    ]
+  }
+}

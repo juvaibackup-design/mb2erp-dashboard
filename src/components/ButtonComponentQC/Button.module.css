@@ -1,0 +1,33 @@
+.cancelButton {
+  color: white;
+  background-color: #f5222d;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  transform: rotate(90deg);
+  padding-right: 2rem;
+  cursor: pointer;
+  clip-path: polygon(0% 0%, 60% 0%, 80% 50%, 100% 100%, 0% 100%);
+  @media (min-width: 320px) and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.right {
+  width: 6.3rem;
+  height: 2rem;
+  color: white;
+  font-size: 10px;
+  background-color: #f5222d;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  transform: rotate(90deg);
+  padding-right: 2rem;
+  cursor: pointer;
+  clip-path: polygon(0% 0%, 60% 0%, 100% 0%, 70% 100%, 0% 100%);
+  z-index: 9999;
+  /* @media (min-width: 320px) and (max-width: 767px) {
+    display: none;
+  } */
+}

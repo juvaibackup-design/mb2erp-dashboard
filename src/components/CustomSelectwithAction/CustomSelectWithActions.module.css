@@ -1,0 +1,50 @@
+/* components/SelectWithActions/SelectWithActions.module.css */
+.dropdownContainer {
+  background: #fff;
+}
+
+.searchContainer {
+  padding: 8px;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.searchInput {
+  width: 100%;
+}
+
+.searchInput :global(.ant-input) {
+  font-size: 14px;
+}
+
+.optionsList {
+  max-height: 256px;
+  overflow-y: auto;
+}
+
+.footer {
+  padding: 8px 12px;
+  background: #fafafa;
+}
+
+.actionButton {
+  color: #1890ff;
+  font-size: 13px;
+  padding: 4px 8px;
+  height: auto;
+  font-weight: 500;
+}
+
+.actionButton:hover {
+  color: #40a9ff;
+  background: rgba(24, 144, 255, 0.1);
+}
+
+.actionButton:disabled {
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+}
+
+.actionButton:disabled:hover {
+  background: transparent;
+}

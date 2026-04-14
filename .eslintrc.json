@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended" // Add this line
+  ],
+  "parser": "@typescript-eslint/parser", // Add this line
+  "plugins": [
+    "@typescript-eslint" // Add this line (though the "extends" line often handles this)
+  ],
+  "rules": {
+    // Optionally, customize rules here if needed. For example:
+    "@typescript-eslint/no-unused-vars": "warn" // Or "error"
+  }
+}

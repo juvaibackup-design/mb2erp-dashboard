@@ -1,0 +1,81 @@
+.treeWrap {
+  width: 300px;
+  height: calc(100% - 20px);
+  /* max-height: 100%; */
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.outlineNew span:nth-child(3) {
+  border: 1px solid #d9d9d9;
+  padding-inline: 4px;
+}
+
+/* .outlineNew:hover {
+  border: none;
+  padding-inline: 0;
+} */
+
+.reactQuillWrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* <— make right pane take remaining space */
+  min-width: 0; /* <— prevents overflow pushing content away */
+  height: 100%; /* use full height of the Flex container */
+  overflow: hidden; /* outer does NOT scroll */
+}
+
+.headerInput {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  font-size: 22px !important;
+  font-weight: 700;
+  padding-left: 0;
+  padding: 10px 12px 8px 0;
+}
+
+.contentScroll {
+  flex: 1;
+  min-height: 0; /* critical for flex scrolling */
+  overflow: auto; /* only this scrolls */
+}
+
+@media (max-width: 768px) {
+  .treeWrap {
+    width: 100% !important;
+    height: calc(100% - 20px);
+  }
+  .reactQuillWrap {
+    width: 100% !important;
+    height: calc(100% - 20px);
+  }
+  .headerInput {
+    font-size: 16px !important;
+    font-weight: 700;
+  }
+}
+
+/* Sticky back bar for mobile content view */
+.backBar {
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 10px 12px;
+}
+
+.backBtn {
+  width: 20%;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 600;
+  background: #fafafa;
+  cursor: pointer;
+}
+.backBtn:active {
+  transform: translateY(1px);
+}

@@ -1,0 +1,362 @@
+.container {
+  width: 100%;
+  overflow: auto;
+  height: 100vh;
+}
+
+.sub_container {
+  padding: 0 24px;
+  max-height: 60px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  /* background-color: #fafafa; */
+  /* background-color: white; */
+}
+
+.tab {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  /* 18px */
+  letter-spacing: 0.072px;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  padding-right: 0;
+  white-space: nowrap;
+}
+
+.gap {
+  margin-left: 16px;
+}
+
+.centered {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tab_container {
+  margin-right: 8px;
+}
+
+.tab_container.active_tab {
+  background-color: aliceblue;
+  padding-inline: 8px;
+  border-radius: 12px;
+}
+
+.closeTab {
+  border: 0;
+  background: transparent;
+  height: 14px;
+  padding-left: 5px;
+}
+
+.closeTabIcon {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+.tab_overflow {
+  width: 70%;
+  overflow-x: auto;
+}
+
+.pageRenderContainer {
+  padding: 0 12px;
+  height: calc(100vh - 60px);
+}
+
+.textCenter {
+  text-align: center;
+}
+
+/*********************************************************/
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.alert {
+  margin: 0;
+  padding: 4px 0 1.5rem 0;
+  text-align: center;
+}
+
+.groupButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 0.6rem;
+}
+
+.yesButton {
+  width: 50%;
+  color: #0d39fe;
+  font-size: 14px;
+  font-family: "__chivo_a768de";
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  padding: 4px 0.9rem;
+  border-radius: 5px;
+}
+
+.noButton {
+  width: 50%;
+  color: #0d39fe;
+  font-size: 14px;
+  font-family: "__chivo_a768de";
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  color: #fff;
+  padding: 4px 0.9rem;
+  border-radius: 5px;
+}
+
+.cancelButton {
+  position: absolute;
+  right: -6rem;
+  top: -1rem;
+  color: white;
+  background-color: #f5222d;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  transform: rotate(90deg);
+  padding-right: 2rem;
+  cursor: pointer;
+  clip-path: polygon(0% 0%, 60% 0%, 80% 50%, 100% 100%, 0% 100%);
+}
+
+.camera {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 50%;
+  z-index: 9999;
+}
+
+/************new coding************/
+.searchicon {
+  display: none !important;
+}
+
+.mob_logo {
+  display: none;
+}
+
+.menu {
+  display: none;
+}
+
+/* styles.mobile.css */
+@media (min-width: 320px) and (max-width: 768px) {
+  .search {
+    display: none !important;
+  }
+
+  .MobtopNavButtons {
+    background-color: transparent;
+    border: 0;
+    padding: 3px;
+    margin-left: 13px;
+    width: max-content;
+    cursor: pointer;
+  }
+
+  .searchicon {
+    display: block !important;
+    max-width: 20px;
+    /* height: 20px; */
+    color: #8c8c8c !important;
+    width: max-content !important;
+  }
+
+  .mob_logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding: 14px 15px; */
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .icubeFont {
+    margin-left: 12px;
+  }
+
+  .sub_container {
+    background-color: #f0f0f0;
+    z-index: 1000;
+  }
+
+  .menu {
+    display: block;
+    position: absolute;
+    top: 60px;
+    /* Adjust this value to position the menu below the logo */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    /* Change to desired background color */
+    border: 1px solid #ccc;
+    /* Add a border if desired */
+    border-top: none;
+    /* Hide top border to merge with logo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add shadow for depth */
+    /* animation: slideDown 0.3s ease; Animation for sliding down */
+  }
+
+  .menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    /* Add a border between menu items */
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .tab_overflow {
+    display: none;
+  }
+}
+
+.tabsContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.scrollButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 8px;
+}
+
+.tabsWrapper {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  flex-grow: 1;
+}
+
+.tabContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  white-space: nowrap;
+}
+
+.tab {
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tab_container:not(.active_tab) .closeTab {
+  display: none;
+  background-color: transparent;
+  border: none;
+  font-size: 12px;
+  /* margin-left: 8px; */
+  cursor: pointer;
+  /* width: 0;
+  transition: width 0.3s ease; */
+}
+
+.tab_container:hover .closeTab {
+  display: block;
+  /* width: 15px; */
+}
+
+.divider {
+  visibility: visible;
+  border-left: 2px solid grey;
+  height: 0.75rem;
+  margin-right: 10px;
+}
+
+.tab_container:hover .divider {
+  visibility: hidden;
+}
+
+.tab_container:last-child .divider {
+  visibility: hidden;
+}
+
+.passwordInputBox {
+  -webkit-text-security: disc;
+}
+
+/* app header scroll issue */
+.tab_overflow::-webkit-scrollbar {
+  width: 8px !important;
+  /* Set the width of the vertical scrollbar */
+  height: 8px !important;
+  /* Set the height of the horizontal scrollbar */
+}
+
+/* Style the track (background of the scrollbar) */
+.tab_overflow::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Light gray */
+  border-radius: 10px;
+  /* Rounded corners */
+}
+
+/* Style the thumb (draggable part of the scrollbar) */
+.tab_overflow::-webkit-scrollbar-thumb {
+  background: #aebdff;
+  /* Gray */
+  border-radius: 10px;
+  /* Rounded corners */
+  border: 3px solid #f1f1f1;
+  /* Border around the thumb */
+}
+
+/* Style the thumb when it's being hovered */
+.tab_overflow::-webkit-scrollbar-thumb:hover {
+  background: #5d7bfe;
+  /* Darker gray on hover */
+}
+
+/* Optional: Style the scrollbar corner (where horizontal and vertical scrollbars meet) */
+.tab_overflow::-webkit-scrollbar-corner {
+  background: #f1f1f1;
+  /* Light gray */
+}

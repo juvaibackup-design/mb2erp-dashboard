@@ -1,0 +1,110 @@
+.modalHeader {
+  padding-bottom: 16px;
+  width: 100%;
+  @media (max-width: 768px) {
+    width: 60% !important;
+  }
+}
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px !important;
+}
+.cancelButton {
+  position: absolute;
+  right: -4.12rem;
+  top: 2.13rem;
+  /* clip-path: polygon(0% 0%, 70% 0%, 100% 100%, 100% 100%, 0% 100%); */
+  clip-path: polygon(0% 0%, 60% 0%, 69% 0%, 100% 100%, 0% 95%) !important;
+}
+
+.desc {
+  color: #595959;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+.title {
+  color: #141414 !important;
+  font-size: 18px !important;
+  font-style: normal;
+  @media (max-width: 768px) {
+    font-size: 16px !important;
+  }
+}
+
+.header {
+  color: var(--red-primary);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.groupButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 0.6rem;
+}
+
+.yesButton {
+  width: 50%;
+  color: #0d39fe;
+  /* color: var(--red-primary) !important; */
+  /* border: 1px solid var(--red-primary) !important; */
+  font-size: 14px;
+  font-family: "__chivo_a768de";
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  padding: 4px 0.9rem;
+  border-radius: 5px;
+}
+.noButton {
+  width: 50%;
+  background: #0d39fe !important;
+  color: #fff !important;
+  font-size: 14px;
+  font-family: "__chivo_a768de";
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+
+  padding: 4px 0.9rem;
+  border-radius: 5px;
+}
+/******new coding for mobile responsive*******/
+@media (min-width: 320px) and (max-width: 768px) {
+  .mobCancel_button {
+    display: flex !important;
+    color: #f5222d !important;
+  }
+  .cancelButton {
+    display: none !important;
+  }
+}
+
+/* Dark Mode Changes - Sherin */
+
+:global(.dark-mode) .title {
+  color: #fff !important;
+  font-size: 18px !important;
+  font-style: normal;
+  @media (max-width: 768px) {
+    font-size: 16px !important;
+  }
+}
+
+:global(.dark-mode) .desc {
+  color: #bfbfbf;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}

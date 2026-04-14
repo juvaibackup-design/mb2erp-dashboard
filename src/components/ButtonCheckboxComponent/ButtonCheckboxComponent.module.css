@@ -1,0 +1,8 @@
+.checkboxInput {
+  display: none;
+}
+
+.defaultChecked {
+  background-color: #0D39FE !important;
+  color: #ffffff !important;
+}

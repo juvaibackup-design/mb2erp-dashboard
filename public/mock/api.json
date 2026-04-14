@@ -1,0 +1,92 @@
+[
+  {
+    "parentGroup": "liabilities",
+    "rows": [
+      {
+        "period_key": "FY25-Q3",
+        "parent": "liabilities",
+        "primary_grp": "Current Liabilities",
+        "group_under": 7,
+        "group_id": 26,
+        "group_name": "2510 - Sundry Creditors",
+        "gl_id": null,
+        "gl_name": null,
+        "sl_id": 2201,
+        "sl_name": "Eswar",
+        "branch_id": 1,
+        "branch_name": "Moon fashions",
+        "company_id": 1,
+        "amount": 3705.0
+      },
+      {
+        "period_key": "FY25-Q4",
+        "parent": "liabilities",
+        "primary_grp": "Current Liabilities",
+        "group_under": 7,
+        "group_id": 26,
+        "group_name": "2510 - Sundry Creditors",
+        "gl_id": null,
+        "gl_name": null,
+        "sl_id": 2201,
+        "sl_name": "Eswar",
+        "branch_id": 1,
+        "branch_name": "Moon fashions",
+        "company_id": 1,
+        "amount": 34723.0
+      },
+      {
+        "period_key": "FY25-Q4",
+        "parent": "liabilities",
+        "primary_grp": "Current Liabilities",
+        "group_under": 7,
+        "group_id": 26,
+        "group_name": "2510 - Sundry Creditors",
+        "gl_id": null,
+        "gl_name": null,
+        "sl_id": 2279,
+        "sl_name": "Payment voucher 001",
+        "branch_id": 1,
+        "branch_name": "Moon fashions",
+        "company_id": 1,
+        "amount": 25723.0
+      }
+    ]
+  },
+  {
+    "parentGroup": "assets",
+    "rows": [
+      {
+        "period_key": "FY25-Q3",
+        "parent": "assets",
+        "primary_grp": "Current Assets",
+        "group_under": 10,
+        "group_id": 31,
+        "group_name": "Cash-in Hand",
+        "gl_id": 7,
+        "gl_name": "Cash",
+        "sl_id": null,
+        "sl_name": null,
+        "branch_id": 1,
+        "branch_name": "Moon fashions",
+        "company_id": 1,
+        "amount": -27500.0
+      },
+      {
+        "period_key": "FY25-Q4",
+        "parent": "assets",
+        "primary_grp": "Current Assets",
+        "group_under": 10,
+        "group_id": 31,
+        "group_name": "Cash-in Hand",
+        "gl_id": 7,
+        "gl_name": "Cash",
+        "sl_id": null,
+        "sl_name": null,
+        "branch_id": 1,
+        "branch_name": "Moon fashions",
+        "company_id": 1,
+        "amount": -3750.0
+      }
+    ]
+  }
+]

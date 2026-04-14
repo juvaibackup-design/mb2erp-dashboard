@@ -1,0 +1,129 @@
+.arrows {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+}
+
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.arrowBtns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.imgPreview {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: flex-start; */
+  justify-content: center;
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+.imgScollList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: scroll;
+}
+
+.imgPrevBox {
+  width: 40px;
+  height: 40px;
+  border: 0.7px solid #bebebe;
+  text-align: center;
+  /* margin: 0px 8px; */
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.dropzone {
+  max-width: 450px;
+  height: 280px;
+  border: 2px dotted blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.previewImg {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #e3dbdb;
+  margin: 0px 4px;
+}
+
+.imgBox {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.previewContainer {
+  height: 100px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  overflow-x: scroll;
+}
+
+.placeTopRight {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  translate: 50% -50%;
+}
+
+.tabContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 10;
+}
+
+.imageContainer {
+  height: 300px;
+  overflow-y: auto;
+  padding-right: 12px;
+  padding-top: 8px;
+}
+
+.gridImage {
+  position: relative;
+  flex-basis: 30%;
+  cursor: pointer;
+}
+
+.carouselImage {}
+
+.cursorPointer {
+  cursor: pointer;
+}
+
+.minusButton {
+  color: #f5222d !important;
+  background-color: beige;
+  cursor: pointer;
+}

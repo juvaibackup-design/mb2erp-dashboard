@@ -1,0 +1,45 @@
+.country-code-select {
+  display: flex;
+  width: 100%;
+}
+.country-code-select .ant-select-selector {
+  border-right-width: 0 !important;
+  border-radius: 6px 0 0 6px !important;
+}
+.country-code-select .ant-select-selection-item {
+  color: transparent;
+  width: 71px;
+  padding-right: 0px !important;
+}
+.country-code-select .ant-select-selection-item::before {
+  content: attr(data-title);
+  color: black;
+}
+.country-code-select
+  .ant-select-selector:has(.ant-select-selection-search-input:focus)
+  .ant-select-selector {
+  border-right-width: 1px !important;
+  border-radius: 6px 0 0 6px !important;
+}
+.country-code-select
+  .ant-select-selector:has(.ant-select-selection-search-input:focus)
+  .ant-select-selection-item {
+  color: rgba(0, 0, 0, 0.25);
+  width: auto;
+  padding-right: 18px !important;
+}
+.country-code-select
+  .ant-select-selector:has(.ant-select-selection-search-input:focus)
+  .ant-select-selection-item::before {
+  content: "";
+}
+/* .country-code-select .ant-select-dropdown {
+  width: auto !important;
+}
+.country-code-select .rc-virtual-list-holder-inner {
+  position: static !important;
+} */
+.country-code-select .ant-select-selection-item,
+.country-code-select-dropdown .ant-select-item-option-content {
+  font-family: "Twemoji Country Flags", "__chivo_a768de","__chivo_Fallback_a768de" !important;
+}

@@ -1,0 +1,185 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.brandIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #bebebe40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon_vendorName {
+  margin: 0;
+  color: #000;
+  font-size: 10px;
+}
+.moreIcon {
+  display: flex;
+  padding-left: 16px;
+  cursor: pointer;
+}
+.invoiceData {
+  /* Sherin */
+  /* color: #141414; */         
+  color: #595959;
+  /* Ends */
+  margin-left: 5px;
+}
+.vendorName {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #1677ff !important;
+  cursor: pointer;
+}
+.leftALignedText {
+  text-align: left;
+}
+.cardFlex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.invoiceImg {
+  /* width: 50px;
+  height: 50px; */
+  border-radius: 50px;
+}
+.gap {
+  padding-right: 16px;
+}
+.heading {
+  /* Dark Mode from 10px to 12px, #595959 to #000000 - sherin */
+  color: var(--text-icon-level-1, #000000);
+  font-size: 12px;        
+  /* Ends  */
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 21px */
+  letter-spacing: 0.084px;
+  margin: 0;
+}
+.amount {
+  margin: 0;
+  color: var(--text-icon-level-2, #262626);
+  font-family: sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 10px */
+  letter-spacing: 0.096px;
+  text-align: left;
+}
+.rightALignedText {
+  text-align: right;
+}
+.align_centered {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+}
+.stockPoint {
+  color: #595959;
+  font-weight: 500;
+  margin-left: 5px;
+}
+.margin {
+  margin: 5px 0;
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.detailColumn {
+  display: flex;
+  gap: 6px;
+  min-width: 45%; 
+}
+
+.detailLabel {
+  font-weight: bold;
+}
+
+.detailValue {
+  color: #333;
+}
+/* .fieldscontainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+  gap: 10px;
+} */
+.fieldscontainer {
+  display: grid;
+  /* grid-template-columns: repeat(2, 1fr);  */
+  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+  gap: 10px;
+}
+
+.field:nth-child(odd) {
+  justify-self: start; /* Aligns left */
+}
+
+.field:nth-child(even) {
+  justify-self: end; /* Aligns right */
+}
+
+
+
+/* Dark Mode Changes - Sherin */
+
+:global(.dark-mode) .heading {
+  color: var(--text-icon-level-1, #000000);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 21px */
+  letter-spacing: 0.084px;
+  margin: 0;
+}
+
+:global(.dark-mode) .invoiceData {
+  color: #595959;
+  margin-left: 5px;
+}
+
+:global(.dark-mode) .amount {
+  margin: 0;
+  color: var(--text-icon-level-2, #262626);
+  font-family: sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 10px */
+  letter-spacing: 0.096px;
+  text-align: left;
+}
+
+:global(.dark-mode) .stockPoint {
+  color: #595959;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+:global(.dark-mode) .icon_vendorName {
+  margin: 0;
+  color: #000;
+  font-size: 10px;
+}
+

@@ -1,0 +1,140 @@
+.chatBox {
+  border: 1px solid rgb(204, 204, 204);
+  width: 325px;
+  max-width: 500px;
+  /* height: 100vh; */
+  height: 80vh;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  background-color: #fff;
+  z-index: 1000;
+  /* translate: 200px 0; */
+  top: 100px;
+  left: 175px;
+}
+
+.chatHeader {
+  font-weight: 500;
+  font-size: 1.15rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatHeader:active {
+  cursor: grabbing;
+}
+
+.chatHeaderBrand {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.chatSpace {
+  overflow: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-top: 1px solid rgb(204, 204, 204);
+  /* ::before {
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  } */
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #fafafa;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px !important;
+  cursor: pointer;
+}
+
+.card:hover {
+  opacity: 0.7;
+}
+
+.senderMessage::before {
+  content: "";
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.senderMessage {
+  text-align: right;
+  align-self: flex-end;
+  max-width: 90%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.02);
+  font-size: 0.85rem;
+}
+
+.receivedMessage {
+  text-align: left;
+  align-self: flex-start;
+  max-width: 90%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: #0d39fe;
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.receivedMessage::after {
+  content: "";
+  clip-path: polygon(0 100%, 100% 100%, 100% 0);
+}
+
+.chatFooter {
+  display: flex;
+  border-radius: 0;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  border-top: 1px solid rgb(204, 204, 204);
+}
+
+.chatInput {
+  font-size: 0.8rem;
+  flex-grow: 1;
+  border: none;
+  border-radius: 0;
+  border-bottom-left-radius: inherit;
+  padding: 0.6rem;
+  outline: none;
+}
+
+.chatInput:focus {
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  border: 1px solid #1677ff;
+  margin: -1px;
+}
+
+.sendBtn {
+  font-size: 0.8rem;
+  background-color: #0d39fe;
+  padding: 0.6rem;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  border-bottom-right-radius: inherit;
+}
+
+.sendBtn:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.sendBtn:active {
+  opacity: 1;
+  background-color: #0124C8;
+  box-shadow: 0 0 0 4px rgba(5, 145, 255, 0.1);
+}

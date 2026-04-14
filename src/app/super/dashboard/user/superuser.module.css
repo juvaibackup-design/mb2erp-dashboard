@@ -1,0 +1,190 @@
+.drawerHeader {
+  margin: 0;
+  color: #141414;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+}
+.header {
+  padding: 0 12px;
+  max-height: 60px;
+  height: 100%;
+}
+.drawerHeaderTwo {
+  margin: 0;
+  color: #595959;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.072px;
+  padding-bottom: 0.625rem;
+}
+
+.form_wrapper {
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.75rem;
+}
+
+.modification_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.message {
+  margin: 0;
+}
+
+.select_discount {
+  margin-top: 0.75rem;
+}
+
+.filter_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+}
+
+.viewType {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filterByMethod {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+/* .PricePageHeader {
+  padding-left: 24px;
+} */
+
+.reset_button {
+  width: 7.4rem;
+  padding: 4px 0.98rem;
+  border-radius: 3px;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.save_button {
+  width: 7.4rem;
+  padding: 4px 0.98rem;
+  border-radius: 3px;
+}
+.group_button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.scrollCont {
+  /* height: calc(100% - 110px - 16px); */
+  height: calc(100% - 140px);
+
+  overflow-x: auto;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+/* UserForm */
+.userFormContent {
+  height: 100%;
+}
+.formHeader {
+  max-height: 40px;
+  height: 100%;
+  margin-bottom: 8px;
+}
+/* .form {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 6px;
+} */
+.form {
+  height: 100%;
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.scrollerContainer {
+  overflow: auto;
+  padding: 0 4px 20px 4px;
+}
+.scrollerContainer::-webkit-scrollbar {
+  display: none !important;
+}
+.footerBtnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 0;
+  border-top: 1px solid #bebebe40;
+}
+.footer {
+  background: #fff;
+  position: sticky;
+  bottom: 0;
+  max-height: 50px;
+  height: 100%;
+  /* flex-shrink: 0; */
+  border-top: 1px solid rgba(5, 5, 5, 0.06);
+}
+.formBtn {
+  width: 120px;
+}
+.cancel_button {
+  display: none !important;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .cancel_button {
+    display: inline-block !important;
+    color: #f5222d !important;
+  }
+}
+/* user.module.css or Card.module.css */
+.cardBoxShadow {
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06); /* light base shadow */
+  border-radius: 8px;
+}
+
+:global(.ant-card-hoverable).cardBoxShadow:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* stronger hover shadow */
+  transform: translateY(-2px); /* optional small lift */
+}
+
+
+.input-label {
+  font-size: 14px;        /* same as InputComponent labels */
+  font-weight: 500;      /* medium weight */
+  color: #000000;        /* matches other labels */
+  line-height: 1.4;
+  margin-bottom: 4px;    /* same label → field gap */
+}

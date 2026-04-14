@@ -1,0 +1,79 @@
+.modalContent {
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: -50px;
+  display: flex;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 36px;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+}
+
+.modalBody {
+  display: flex;
+  padding-top: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1 0 0;
+  background: var(--Base-White, #fff);
+}
+
+.previewContainer {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.previewDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid rgb(212, 218, 220);
+  width: 380px;
+  border-radius: 12px;
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.productName {
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: var(--Label-Large-Line-Height, 20px);
+  /* 166.667% */
+  letter-spacing: var(--Label-Large-Tracking, 0.1px);
+  text-transform: capitalize;
+}
+
+.itemPrice {
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  /* font-weight: 600; */
+  line-height: var(--Body-Medium-Line-Height, 20px);
+  /* 142.857% */
+  letter-spacing: var(--Body-Medium-Tracking, 0.25px);
+  color: gray;
+}
+
+.itemDetail {
+  overflow-y: auto;
+  height: 330px;
+}

@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /* height: fit-content; */
+  height: calc(100% - 0px);
+  width: 100%;
+  background: #f9fafb;
+}
+
+/* ✅ HEADER BAR */
+.header {
+  height: 64px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Button */
+.userManualBtn {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* CONTENT AREA */
+.pageRenderContainer {
+  flex: 1;
+  /* padding: 20px; */
+  overflow-y: auto;
+}

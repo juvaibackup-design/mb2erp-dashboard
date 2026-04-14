@@ -1,0 +1,88 @@
+.floatingLabelContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 56px;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 8px;
+  border: 1px solid var(--Schemes-Outline-Variant, #bfc8ca);
+  background: var(--Schemes-On-Primary, #fff);
+  overflow: hidden; /* Prevent shadow overflow */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+.floatingLabelContainer.inputError {
+  border: 1.5px solid #df5029;
+  box-shadow: 0px 0px 0px 4px #e8bdb4;
+}
+
+.floatingLabelContainer:focus-within {
+  border: 1.5px solid #5da1ab !important; /* Focus border */
+  box-shadow: 0px 0px 0px 4px #cfe8ed !important; /* Focus shadow */
+}
+
+/* Adjust the Select component inside */
+.floatingLabelContainer .ant-select-selector {
+  border: none !important; /* Remove the default Ant Design border */
+  box-shadow: none !important; /* Ensure no extra shadow */
+  background: transparent; /* Match the container's background */
+}
+
+/* Optional: Add focus for the label */
+.floatingLabelContainer .floatingLabel.active {
+  transform: translateY(-14px);
+  font-size: 12px;
+}
+
+.floatingSelect {
+  width: 100%;
+  height: 100% !important;
+  font-size: 16px;
+  padding: 25px 0.75rem 0;
+  border-radius: 8px;
+  border: none !important;
+  outline: none !important;
+  transition: none;
+}
+
+.floatingSelect.ant-input {
+  padding: 0 !important;
+}
+
+.floatingLabel {
+  position: absolute;
+  color: #6f797b;
+  top: 50%;
+  left: 0.75rem;
+  translate: 0 -50%;
+  line-height: 1;
+  transition: 200ms ease-in-out;
+  pointer-events: none;
+}
+
+.floatingLabel.active {
+  position: absolute;
+  color: #6f797b;
+  top: 50%;
+  left: 0.75rem;
+  translate: 0 -50%;
+  line-height: 1;
+  transition: 200ms ease-in-out;
+  pointer-events: none;
+}
+
+/* Dark Mode Changes - Sherin */
+:global(.dark-mode) .floatingLabelContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 56px;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 8px;
+  border: 1px solid var(--Schemes-Outline-Variant, #bfc8ca);
+  background: var(--Schemes-On-Primary, #141414);
+  overflow: hidden; /* Prevent shadow overflow */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+}

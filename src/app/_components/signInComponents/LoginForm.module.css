@@ -1,0 +1,133 @@
+.login_form {
+  padding: 16px 32px;
+}
+.formInputIcon {
+  width: 14px;
+  height: 14px;
+  color: #0d39fe !important;
+}
+.eyeBtn {
+  background-color: transparent;
+  border: 0;
+}
+.eyeBtn:hover {
+  background-color: #bebebe40;
+  border-radius: 24px;
+}
+.remme {
+  margin: 7px 0 7px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.remme_text {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  color: #262626;
+  margin-left: 8px !important;
+  margin: 0;
+  letter-spacing: 0.072px;
+}
+.paddingGap {
+  padding-bottom: 8px;
+}
+.fpass {
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 150% !important;
+  letter-spacing: 0.072px;
+  color: #0d39fe !important;
+  margin-left: 8px !important;
+  margin: 0;
+  padding: 0 !important;
+  height: max-content !important;
+}
+.gapAbove {
+  /* padding-top: 50px; */
+  padding-top: 25px;
+}
+.gapBelow {
+  /* padding-bottom: 50px; */
+}
+.fpass:hover {
+  background-color: transparent !important;
+}
+.signinBtn {
+  width: 100%;
+  padding: 16px 24px;
+  height: max-content;
+}
+.loginButton {
+  width: 100%;
+  padding: 16px 24px !important;
+  border-radius: 8px;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  height: max-content !important;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.footText {
+  color: #141414;
+  text-align: center;
+  font-size: 13px;
+  line-height: 150%;
+  letter-spacing: 0.01px;
+}
+.loginInputBox {
+  padding: 5px 12px !important;
+  height: 32px !important;
+}
+.passwordInputBox {
+  padding: 5px 12px !important;
+  height: 32px !important;
+  -webkit-text-security: disc;
+}
+.isForgotPassComponent {
+  color: #262626 !important;
+  font-size: 13px;
+  padding: 1.75rem 0 2.25rem 0;
+}
+.sub_loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7px;
+}
+.logo {
+  margin-bottom: 16px;
+}
+.text {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.01px;
+  color: #262626;
+  text-align: center;
+}
+
+.pass_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 0 0;
+  min-width: 100% !important;
+  align-items: center;
+}
+/******new coding**********/
+@media (min-width: 320px) and (max-width: 767px) {
+  .gapAbove {
+    /* position: fixed;
+    right: 28px;
+    left: 26px;
+    bottom: 38px; */
+    position: relative;
+    right: 29px;
+    left: 4px;
+    bottom: -96px;
+  }
+}

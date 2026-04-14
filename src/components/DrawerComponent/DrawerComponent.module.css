@@ -1,0 +1,83 @@
+.drawerHeader {
+  margin: 0;
+  color: #141414;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+.drawerHeaderTwo {
+  margin: 0;
+  color: #595959;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.072px;
+  padding-bottom: 0.625rem;
+}
+
+.group_button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.reset_button {
+  width: 7.4rem;
+  padding: 4px 0.98rem;
+  border-radius: 3px;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.save_button {
+  width: 7.4rem;
+  padding: 4px 0.98rem;
+  border-radius: 3px;
+  color: #fff !important;
+}
+
+.button {
+  position: absolute;
+  top: 32px;
+  left: -66px;
+  transition: opacity 0.3s;
+}
+
+.custHeaderLayout {
+  max-height: 70px;
+  height: 100%;
+}
+
+.customContentLayout {
+  height: calc(100% - 70px);
+}
+.cancel_button {
+  display: none !important;
+}
+
+/******new coding for mobile responsive*******/
+@media (min-width: 320px) and (max-width: 767px) {
+  .cancel_button {
+    display: flex !important;
+    color: #f5222d !important;
+  }
+  .button {
+    display: none !important;
+  }
+}
+
+
+/* Dark Mode Changes - Sherin  */
+:global(.dark-mode) .drawerHeader{
+  color: #ffffff !important;
+}
+
+:global(.dark-mode) .drawerHeaderTwo {
+  color: #bfbfbf !important;
+}
+

@@ -1,0 +1,230 @@
+{
+  "reportType": "BALANCE_SHEET",
+  "currency": "USD",
+  "sites": [
+    { "key": "site1", "label": "site-1" },
+    { "key": "site2", "label": "site-2" },
+    { "key": "site3", "label": "site-3" },
+    { "key": "site4", "label": "site-4" },
+    { "key": "site5", "label": "site-5" }
+  ],
+  "rows": [
+
+
+    {
+      "path": ["Assets"],
+      "consolidated": 8466800,
+      "site1": 2082000,
+      "site2": 1665600,
+      "site3": 1249200,
+      "site4": 2498400,
+      "site5": 971600
+    },
+
+    {
+      "path": ["Assets", "Current Assets"],
+      "consolidated": 2324100,
+      "site1": 571500,
+      "site2": 457200,
+      "site3": 342900,
+      "site4": 685800,
+      "site5": 266700
+    },
+
+    {
+      "path": ["Assets", "Current Assets", "Cash & Bank"],
+      "consolidated": 762500,
+      "site1": 187500,
+      "site2": 150000,
+      "site3": 112500,
+      "site4": 225000,
+      "site5": 87500
+    },
+
+    {
+      "path": ["Assets", "Current Assets", "Cash & Bank", "1001 Petty Cash"],
+      "consolidated": 30500,
+      "site1": 7500,
+      "site2": 6000,
+      "site3": 4500,
+      "site4": 9000,
+      "site5": 3500
+    },
+    {
+      "path": ["Assets", "Current Assets", "Cash & Bank", "1002 Cash Counter"],
+      "consolidated": 42000,
+      "site1": 10000,
+      "site2": 8000,
+      "site3": 6000,
+      "site4": 12000,
+      "site5": 6000
+    },
+    {
+      "path": ["Assets", "Current Assets", "Cash & Bank", "1003 Bank - Main"],
+      "consolidated": 579500,
+      "site1": 142500,
+      "site2": 114000,
+      "site3": 85500,
+      "site4": 171000,
+      "site5": 66500
+    },
+    {
+      "path": ["Assets", "Current Assets", "Cash & Bank", "1004 Bank - Payroll"],
+      "consolidated": 110500,
+      "site1": 27500,
+      "site2": 22000,
+      "site3": 16500,
+      "site4": 33000,
+      "site5": 11500
+    },
+
+    {
+      "path": ["Assets", "Current Assets", "Receivables"],
+      "consolidated": 533750,
+      "site1": 131250,
+      "site2": 105000,
+      "site3": 78750,
+      "site4": 157500,
+      "site5": 61250
+    },
+
+    {
+      "path": ["Assets", "Current Assets", "Inventory"],
+      "consolidated": 951600,
+      "site1": 234000,
+      "site2": 187200,
+      "site3": 140400,
+      "site4": 280800,
+      "site5": 109200
+    },
+
+    {
+      "path": ["Assets", "Fixed Assets"],
+      "consolidated": 5551000,
+      "site1": 1365000,
+      "site2": 1092000,
+      "site3": 819000,
+      "site4": 1638000,
+      "site5": 637000
+    },
+
+    {
+      "path": ["Assets", "Fixed Assets", "Plant & Machinery"],
+      "consolidated": 3250000,
+      "site1": 800000,
+      "site2": 650000,
+      "site3": 480000,
+      "site4": 970000,
+      "site5": 350000
+    },
+    {
+      "path": ["Assets", "Fixed Assets", "Furniture & Fixtures"],
+      "consolidated": 1450000,
+      "site1": 350000,
+      "site2": 280000,
+      "site3": 220000,
+      "site4": 420000,
+      "site5": 180000
+    },
+    {
+      "path": ["Assets", "Fixed Assets", "Vehicles"],
+      "consolidated": 850000,
+      "site1": 215000,
+      "site2": 162000,
+      "site3": 119000,
+      "site4": 248000,
+      "site5": 106000
+    },
+
+
+    {
+      "path": ["Liabilities"],
+      "consolidated": 2754150,
+      "site1": 677250,
+      "site2": 541800,
+      "site3": 406350,
+      "site4": 812700,
+      "site5": 316050
+    },
+
+    {
+      "path": ["Liabilities", "Current Liabilities"],
+      "consolidated": 1550000,
+      "site1": 380000,
+      "site2": 310000,
+      "site3": 235000,
+      "site4": 460000,
+      "site5": 165000
+    },
+
+    {
+      "path": ["Liabilities", "Current Liabilities", "Trade Payables"],
+      "consolidated": 920000,
+      "site1": 230000,
+      "site2": 180000,
+      "site3": 140000,
+      "site4": 270000,
+      "site5": 100000
+    },
+    {
+      "path": ["Liabilities", "Current Liabilities", "Statutory Payables"],
+      "consolidated": 410000,
+      "site1": 100000,
+      "site2": 85000,
+      "site3": 60000,
+      "site4": 120000,
+      "site5": 45000
+    },
+    {
+      "path": ["Liabilities", "Current Liabilities", "Short Term Loans"],
+      "consolidated": 220000,
+      "site1": 50000,
+      "site2": 45000,
+      "site3": 35000,
+      "site4": 70000,
+      "site5": 20000
+    },
+
+    {
+      "path": ["Liabilities", "Long Term Liabilities"],
+      "consolidated": 1204150,
+      "site1": 297250,
+      "site2": 231800,
+      "site3": 171350,
+      "site4": 352700,
+      "site5": 151050
+    },
+
+
+    {
+      "path": ["Equity"],
+      "consolidated": 3322650,
+      "site1": 819750,
+      "site2": 655800,
+      "site3": 491850,
+      "site4": 983700,
+      "site5": 371550
+    },
+
+    {
+      "path": ["Equity", "Capital"],
+      "consolidated": 2000000,
+      "site1": 500000,
+      "site2": 400000,
+      "site3": 300000,
+      "site4": 600000,
+      "site5": 200000
+    },
+
+    {
+      "path": ["Equity", "Reserves & Surplus"],
+      "consolidated": 1322650,
+      "site1": 319750,
+      "site2": 255800,
+      "site3": 191850,
+      "site4": 383700,
+      "site5": 171550
+    }
+
+  ]
+}

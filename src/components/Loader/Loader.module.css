@@ -1,0 +1,106 @@
+.loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #bebebe40;
+  z-index: 999999999;
+}
+/* .loader {
+  top: 67px;                
+  right: 913px;             
+  width:auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;  
+  z-index: 0;
+} */
+.spinner {
+  animation: spinner 1.5s linear infinite;
+  width: 1.3rem;
+  height: 1.3rem;
+  transition: transform 0.2s ease-in;
+}
+
+/* .spinnerLogo { */
+  /* width: 100% !important;
+  height: 100% !important; */
+/* } */
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(270deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* @keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(90deg);
+  }
+
+  40% {
+    transform: rotate(180deg);
+  }
+
+  60% {
+    transform: rotate(270deg);
+  }
+
+  80% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+} */
+
+.inventory-logistics-inward {
+  top: 67px;                
+  left: 275px;  
+  display: block;
+  height: auto;
+  width: auto;
+  background-color: transparent;
+}
+
+.inventory-logistics-outward {
+  top: 67px;                
+  left: 290px;  
+  display: block;
+  height: auto;
+  width: auto;
+  background-color: transparent;
+}
+.procurement-receive{
+   top: 20px;                
+  left: 290px;  
+  display: block;
+  height: auto;
+  width: auto;
+  background-color: transparent;
+}
