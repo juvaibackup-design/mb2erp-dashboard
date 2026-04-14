@@ -6,8 +6,7 @@ import { useMemo, useState } from 'react';
 import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { AgGridReact } from 'ag-grid-react';
 
-import { ModuleRegistry, ClientSideRowModelModule, TextFilterModule, ValidationModule, DateFilterModule, NumberFilterModule, AllCommunityModule } from 'ag-grid-community';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import { ModuleRegistry, ClientSideRowModelModule, TextFilterModule, ValidationModule, DateFilterModule, NumberFilterModule,  } from 'ag-grid-community';
 import "@/lib/antdOverwrittenCss/global.css";
 
 
@@ -17,8 +16,7 @@ ModuleRegistry.registerModules([
   DateFilterModule,
   NumberFilterModule,
   ValidationModule,
-  AllCommunityModule, // or AllEnterpriseModule
-  SetFilterModule
+
 ]);
 
 export default function CustomerMappingPage() {

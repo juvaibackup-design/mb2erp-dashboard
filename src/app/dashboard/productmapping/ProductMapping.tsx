@@ -6,8 +6,7 @@ import { useMemo, useState } from 'react';
 import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { AgGridReact } from 'ag-grid-react';
 
-import { ModuleRegistry, ClientSideRowModelModule, TextFilterModule, ValidationModule, DateFilterModule, NumberFilterModule, AllCommunityModule } from 'ag-grid-community';
-import { SetFilterModule } from 'ag-grid-enterprise';
+import { ModuleRegistry, ClientSideRowModelModule, TextFilterModule, ValidationModule, DateFilterModule, NumberFilterModule, } from 'ag-grid-community';
 import "@/lib/antdOverwrittenCss/global.css";
 
 
@@ -17,8 +16,7 @@ ModuleRegistry.registerModules([
   DateFilterModule,
   NumberFilterModule,
   ValidationModule,
-  AllCommunityModule, // or AllEnterpriseModule
-  SetFilterModule
+
 ]);
 
 export default function ProductMappingPage() {
@@ -42,7 +40,7 @@ export default function ProductMappingPage() {
     { headerName: 'Name', field: 'name' },
     { headerName: 'Type', field: 'type' },
     { headerName: 'D365 Item ID', field: 'itemid' },
-  
+
     { headerName: 'Location', field: 'location' },
 
     {
@@ -91,9 +89,9 @@ export default function ProductMappingPage() {
   // ✅ Data for both tabs
   const mindbodyData = [
     { id: 'MB-PROD-001', name: 'Monthly Membership - Premium', type: 'Membership', itemid: 'ITEM-MEM-001', location: 'Downtown', status: 'Mapped' },
-    { id: 'MB-PROD-002', name: 'Personal Training Session', type: 'Membership',  itemid: 'ITEM-SRV-002', location: 'Uptown', status: 'Mapped' },
-    { id: 'MB-PROD-003', name: 'Yoga Mat - Premium', type: 'Membership',itemid: 'Not mapped', location: 'Downtown', status: 'Pending' },
-    { id: 'MB-PROD-004', name: '10 Session Package',type: 'Membership', itemid: 'ITEM-PKG-004', location: 'Midtown', status: 'Duplicate' },
+    { id: 'MB-PROD-002', name: 'Personal Training Session', type: 'Membership', itemid: 'ITEM-SRV-002', location: 'Uptown', status: 'Mapped' },
+    { id: 'MB-PROD-003', name: 'Yoga Mat - Premium', type: 'Membership', itemid: 'Not mapped', location: 'Downtown', status: 'Pending' },
+    { id: 'MB-PROD-004', name: '10 Session Package', type: 'Membership', itemid: 'ITEM-PKG-004', location: 'Midtown', status: 'Duplicate' },
   ];
 
   const foodicsData = [
@@ -108,7 +106,7 @@ export default function ProductMappingPage() {
       {/* HEADER */}
       <h1 className={styles.dashboardTitle}>Product/Service Mapping</h1>
       <p className={styles.dashboardSubtitle}>
-       Map Mindbody products and services to D365 items
+        Map Mindbody products and services to D365 items
       </p>
 
       {/* KPI CARDS */}

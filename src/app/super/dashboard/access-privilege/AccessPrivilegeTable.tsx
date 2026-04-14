@@ -15,7 +15,7 @@ import { tagRevalidate } from "@/lib/helpers/serverActions";
 import { handleApiError } from "@/lib/helpers/handleApiError";
 import { AgGridReact } from "ag-grid-react";
 import { SetFilterModule } from 'ag-grid-enterprise';
-import { ModuleRegistry, ClientSideRowModelModule, TextFilterModule, ValidationModule, DateFilterModule, NumberFilterModule, AllCommunityModule } from 'ag-grid-community';
+import { ModuleRegistry, ClientSideRowModelModule, TextFilterModule, ValidationModule, DateFilterModule, NumberFilterModule } from 'ag-grid-community';
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
@@ -23,7 +23,6 @@ ModuleRegistry.registerModules([
   DateFilterModule,
   NumberFilterModule,
   ValidationModule,
-  AllCommunityModule,
   SetFilterModule
 ]);
 

@@ -18,7 +18,6 @@ import {
   ValidationModule,
   DateFilterModule,
   NumberFilterModule,
-  AllCommunityModule,
 } from "ag-grid-community";
 import { useRouter } from 'next/navigation';
 import ExtinctSwitch from '@/components/ExtinctSwitch/ExtinctSwitch';
@@ -30,8 +29,7 @@ ModuleRegistry.registerModules([
   DateFilterModule,
   NumberFilterModule,
   ValidationModule,
-  AllCommunityModule,
-  SetFilterModule,
+
 ]);
 
 const BinTab = () => {
