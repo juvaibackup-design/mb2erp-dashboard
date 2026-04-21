@@ -1,213 +1,614 @@
 'use client';
 
-import { Row, Col, Card, Tabs, Segmented, Input, Button } from 'antd';
-import styles from '@/app/dashboard/dashboard.module.css'; // reuse same css
-import { useMemo, useState } from 'react';
-import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
+import {
+  Row,
+  Col,
+  Card,
+  Segmented,
+  Button,
+  Typography,
+} from 'antd';
+import styles from '@/app/dashboard/dashboard.module.css';
+import {
+  useMemo,
+  useState,
+  useEffect,
+} from 'react';
+
+import {
+  DownloadOutlined,
+  SearchOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
+
 import { AgGridReact } from 'ag-grid-react';
 
-import { ModuleRegistry, ClientSideRowModelModule, TextFilterModule, ValidationModule, DateFilterModule, NumberFilterModule,  } from 'ag-grid-community';
+import {
+  ModuleRegistry,
+  ClientSideRowModelModule,
+  TextFilterModule,
+  ValidationModule,
+  DateFilterModule,
+  NumberFilterModule,
+  AllCommunityModule,
+} from 'ag-grid-community';
+
 import "@/lib/antdOverwrittenCss/global.css";
+import { SetFilterModule } from 'ag-grid-enterprise';
+import ModalComponent from '@/components/ModalComponent/ModalComponent';
+import InputComponent from '@/components/InputComponent/InputComponent';
+import ButtonComponent from '@/components/ButtonComponent/ButtonComponent';
+import makeApiCall from '@/lib/helpers/apiHandlers/api';
+import { CustomerRow, DashboardSummary } from '@/lib/interfaces/customermapping-interface/customermappinginterface';
 
 
+/* =========================================
+   AG GRID MODULES
+========================================= */
+// ✅ v34 needs a row model registered
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
   TextFilterModule,
   DateFilterModule,
   NumberFilterModule,
   ValidationModule,
-
+  AllCommunityModule, // or AllEnterpriseModule
+  SetFilterModule
 ]);
 
+
+/* =========================================
+   COMPONENT
+========================================= */
+
 export default function CustomerMappingPage() {
+  const [tab, setTab] =
+    useState<string>('MindBody');
 
-  const items = [
-    {
-      key: '1',
-      label: 'MindBody',
-      children: <div>MindBody Content</div>,
-    },
-    {
-      key: '2',
-      label: 'Foodics',
-      children: <div>Foodics Content</div>,
-    },
-  ];
-  const [tab, setTab] = useState('MindBody');
-  // ✅ Common Column Definition
-  const columnDefs: any = useMemo(() => [
-    { headerName: 'Mindbody ID', field: 'id' },
-    { headerName: 'Name', field: 'name' },
-    { headerName: 'Email', field: 'email' },
-    { headerName: 'Phone', field: 'phone' },
-    { headerName: 'D365 Account', field: 'account' },
-    { headerName: 'Location', field: 'location' },
+  const [loading, setLoading] =
+    useState<boolean>(false);
 
-    {
-      headerName: 'Status',
-      field: 'status',
-      cellRenderer: (params: any) => {
-        const value = params.value;
+  const [dashboard, setDashboard] =
+    useState<DashboardSummary>({
+      totalCustomers: 0,
+      mapped: 0,
+      pendingReview: 0,
+      blockedOrDuplicate: 0,
+    });
 
-        let color = '#16a34a';
-        let bg = '#dcfce7';
+  const [tableData, setTableData] =
+    useState<CustomerRow[]>([]);
 
-        if (value === 'Pending') {
-          color = '#d97706';
-          bg = '#fef3c7';
-        }
-        if (value === 'Duplicate') {
-          color = '#dc2626';
-          bg = '#fee2e2';
-        }
+  const [modalVisible, setModalVisible] =
+    useState(false);
 
-        return (
-          <span style={{
-            padding: '4px 10px',
-            borderRadius: 20,
-            background: bg,
-            color: color,
-            fontSize: 12
-          }}>
-            {value}
-          </span>
+  const [selectedCustomer, setSelectedCustomer] =
+    useState<CustomerRow | null>(null);
+
+  /* =========================================
+     API LOAD FUNCTION
+  ========================================= */
+
+  const loadCustomers = async (
+    type: string
+  ) => {
+    try {
+      setLoading(true);
+
+      const apiType =
+        type === 'MindBody'
+          ? 'MB'
+          : 'Foodics';
+
+      const res =
+        await makeApiCall.get(
+          `Customer/GetAllCustomer?type='${apiType}'`
         );
-      }
-    },
 
-    {
-      headerName: 'Action',
-      field: 'action',
-      cellRenderer: () => (
-        <span style={{ color: '#2563eb', cursor: 'pointer' }}>
-          Map
-        </span>
-      )
+      const data = res?.data?.data;
+
+      setDashboard(
+        data?.dashboard || {
+          totalCustomers: 0,
+          mapped: 0,
+          pendingReview: 0,
+          blockedOrDuplicate: 0,
+        }
+      );
+
+      setTableData(
+        data?.customer || []
+      );
+    } catch (error) {
+      console.log(
+        'Customer API Error',
+        error
+      );
+
+      setDashboard({
+        totalCustomers: 0,
+        mapped: 0,
+        pendingReview: 0,
+        blockedOrDuplicate: 0,
+      });
+
+      setTableData([]);
+    } finally {
+      setLoading(false);
     }
-  ], []);
+  };
 
-  // ✅ Data for both tabs
-  const mindbodyData = [
-    { id: 'MB-10001', name: 'Sarah Johnson', email: 'sarah@email.com', phone: '+1-555-0101', account: 'CUST-001', location: 'Downtown', status: 'Mapped' },
-    { id: 'MB-10002', name: 'Michael Chen', email: 'mchen@email.com', phone: '+1-555-0102', account: 'CUST-002', location: 'Uptown', status: 'Mapped' },
-    { id: 'MB-10003', name: 'Emma Williams', email: 'emma@email.com', phone: '+1-555-0103', account: 'Not mapped', location: 'Downtown', status: 'Pending' },
-    { id: 'MB-10004', name: 'James Brown', email: 'jbrown@email.com', phone: '+1-555-0104', account: 'Not mapped', location: 'Midtown', status: 'Duplicate' },
-  ];
+  /* =========================================
+     FIRST LOAD + TAB CHANGE
+  ========================================= */
 
-  const foodicsData = [
-    { id: 'FD-20001', name: 'Ali', email: 'ali@email.com', phone: '999999', account: 'CUST-010', location: 'Riyadh', status: 'Mapped' },
-  ];
+  useEffect(() => {
+    loadCustomers(tab);
+  }, [tab]);
 
-  const rowData = tab === 'MindBody' ? mindbodyData : foodicsData;
+  /* =========================================
+     GRID DATA
+  ========================================= */
+
+  const rowData = tableData.map(
+    (item) => ({
+      ...item,
+      account:
+        item.d365account &&
+          item.d365account !== ''
+          ? item.d365account
+          : 'Not mapped',
+    })
+  );
+
+  /* =========================================
+     GRID COLUMN
+  ========================================= */
+
+  const columnDefs: any = useMemo(
+    () => [
+      {
+        headerName: 'Mindbody ID',
+        field: 'mindbody_client_id',
+      },
+      {
+        headerName: 'Name',
+        field: 'customer_name',
+      },
+      {
+        headerName: 'Email',
+        field: 'email',
+      },
+      {
+        headerName: 'Phone',
+        field: 'phone',
+      },
+      {
+        headerName: 'D365 Account',
+        field: 'account',
+      },
+      {
+        headerName: 'Location',
+        field: 'location',
+      },
+      {
+        headerName: 'Status',
+        field: 'status',
+        cellRenderer: (
+          params: any
+        ) => {
+          const value =
+            params.value;
+
+          let color =
+            '#16a34a';
+          let bg =
+            '#dcfce7';
+
+          if (
+            value ===
+            'Pending'
+          ) {
+            color =
+              '#d97706';
+            bg =
+              '#fef3c7';
+          }
+
+          if (
+            value ===
+            'Duplicate' ||
+            value ===
+            'Blocked'
+          ) {
+            color =
+              '#dc2626';
+            bg =
+              '#fee2e2';
+          }
+
+          return (
+            <span
+              style={{
+                padding:
+                  '4px 10px',
+                borderRadius: 20,
+                background:
+                  bg,
+                color:
+                  color,
+                fontSize: 12,
+              }}
+            >
+              {value}
+            </span>
+          );
+        },
+      },
+      {
+        headerName:
+          'Action',
+        field: 'action',
+        cellRenderer: (
+          params: any
+        ) => (
+          <span
+            style={{
+              color:
+                '#2563eb',
+              cursor:
+                'pointer',
+              fontWeight: 600,
+            }}
+            onClick={() => {
+              setSelectedCustomer(
+                params.data
+              );
+              setModalVisible(
+                true
+              );
+            }}
+          >
+            Map
+          </span>
+        ),
+      },
+    ],
+    []
+  );
+
+  /* =========================================
+     UI
+  ========================================= */
 
   return (
-    <div className={styles.dashboardContainer}>
-
+    <div
+      className={
+        styles.dashboardContainer
+      }
+    >
       {/* HEADER */}
-      <h1 className={styles.dashboardTitle}>Customer Mapping</h1>
-      <p className={styles.dashboardSubtitle}>
-        Map Mindbody clients to D365 customer accounts
+      <h1
+        className={
+          styles.dashboardTitle
+        }
+      >
+        Customer Mapping
+      </h1>
+
+      <p
+        className={
+          styles.dashboardSubtitle
+        }
+      >
+        Map external
+        customers to D365
+        customer accounts
       </p>
 
-      {/* KPI CARDS */}
-      <Row gutter={16} style={{ marginTop: 20 }}>
-
-        <Col span={6}>
-          <Card className={styles.kpiCard}>
-            <div className={styles.kpiTitle}>Total Customers</div>
-            <div className={styles.kpiValue}>5</div>
-          </Card>
-        </Col>
-
-        <Col span={6}>
-          <Card className={styles.kpiCard}>
-            <div className={styles.kpiTitle}>Mapped</div>
-            <div className={`${styles.kpiValue} ${styles.successText1}`}>
-              3
-            </div>
-          </Card>
-        </Col>
-
-        <Col span={6}>
-          <Card className={styles.kpiCard}>
-            <div className={styles.kpiTitle}>Pending Review</div>
-            <div className={`${styles.kpiValue} ${styles.pendingText}`}>3</div>
-
-          </Card>
-        </Col>
-
-        <Col span={6}>
-          <Card className={styles.kpiCard}>
-            <div className={styles.kpiTitle}>Blocked/Duplicate</div>
-            <div className={`${styles.kpiValue} ${styles.failedText}`}>
-              1
-            </div>
-          </Card>
-        </Col>
-
-      </Row>
-
-
+      {/* TAB */}
       <Segmented
         value={tab}
-        onChange={(val) => setTab(val)}
+        onChange={(val) =>
+          setTab(
+            val as string
+          )
+        }
         options={[
-          { label: 'MindBody', value: 'MindBody' },
-          { label: 'Foodics', value: 'Foodics' },
+          {
+            label:
+              'MindBody',
+            value:
+              'MindBody',
+          },
+          {
+            label:
+              'Foodics',
+            value:
+              'Foodics',
+          },
         ]}
-        className={styles.customSegment}
+        className={
+          styles.customSegment
+        }
       />
-     
-        <Card className={styles.customCard} style={{ marginTop: 20 }}>
 
-          {/* HEADER */}
-          <div className={styles.cardTitle}>Customer List</div>
-          <div className={styles.cardSubTitle}>
-            {tab === 'MindBody' ? "Manage Mindbody to D365 customer mappings":"Manage Foodics to D365 customer mappings"}
-          </div>
-
-          {/* ACTION BAR */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: 20
-          }}>
-            <Input
-              placeholder="Search by name, email, or Mindbody ID..."
-              style={{ width: 350 }}
-            />
-
-            <div style={{ display: 'flex', gap: 10 }}>
-              <Button icon={<UploadOutlined />}>Import</Button>
-              <Button icon={<DownloadOutlined />}>Export</Button>
+      {/* KPI */}
+      <Row
+        gutter={16}
+        style={{
+          marginTop: 20,
+        }}
+      >
+        <Col span={6}>
+          <Card
+            className={
+              styles.kpiCard
+            }
+          >
+            <div
+              className={
+                styles.kpiTitle
+              }
+            >
+              Total Customers
             </div>
-          </div>
 
-          {/* TABLE */}
-          <div className="ag-theme-quartz procurement-aggrid" style={{ height: "300px", width: '100%', marginTop: "15px" }} onContextMenu={() => false}>
+            <div
+              className={
+                styles.kpiValue
+              }
+            >
+              {
+                dashboard.totalCustomers
+              }
+            </div>
+          </Card>
+        </Col>
 
-            <AgGridReact
-              rowData={mindbodyData}
-              columnDefs={columnDefs}
-              selectionColumnDef={{
-                pinned: "left",        // ✅ keep checkbox column fixed on the left
-                width: 50,
-                lockPosition: true,
-                sortable: false,
-                resizable: false,
-              }}
+        <Col span={6}>
+          <Card
+            className={
+              styles.kpiCard
+            }
+          >
+            <div
+              className={
+                styles.kpiTitle
+              }
+            >
+              Mapped
+            </div>
 
-              className="ag-theme-quartz"
-              defaultColDef={{
-                sortable: true,
-                filter: true,
-                resizable: true,
-              }}
+            <div
+              className={`${styles.kpiValue} ${styles.successText1}`}
+            >
+              {
+                dashboard.mapped
+              }
+            </div>
+          </Card>
+        </Col>
+
+        <Col span={6}>
+          <Card
+            className={
+              styles.kpiCard
+            }
+          >
+            <div
+              className={
+                styles.kpiTitle
+              }
+            >
+              Pending Review
+            </div>
+
+            <div
+              className={`${styles.kpiValue} ${styles.pendingText}`}
+            >
+              {
+                dashboard.pendingReview
+              }
+            </div>
+          </Card>
+        </Col>
+
+        <Col span={6}>
+          <Card
+            className={
+              styles.kpiCard
+            }
+          >
+            <div
+              className={
+                styles.kpiTitle
+              }
+            >
+              Blocked /
+              Duplicate
+            </div>
+
+            <div
+              className={`${styles.kpiValue} ${styles.failedText}`}
+            >
+              {
+                dashboard.blockedOrDuplicate
+              }
+            </div>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* TABLE CARD */}
+      <Card
+        className={
+          styles.customCard
+        }
+        style={{
+          marginTop: 20,
+        }}
+      >
+        <div
+          className={
+            styles.cardTitle
+          }
+        >
+          Customer List
+        </div>
+
+        <div
+          className={
+            styles.cardSubTitle
+          }
+        >
+          {tab ===
+            'MindBody'
+            ? 'Manage Mindbody to D365 mappings'
+            : 'Manage Foodics to D365 mappings'}
+        </div>
+
+        {/* ACTION BAR */}
+        <div
+          className={
+            styles.actionBar
+          }
+        >
+          <div
+            className={
+              styles.searchContainer
+            }
+          >
+            <InputComponent
+              placeholder="Search by name, email, or customer id..."
+              prefix={
+                <SearchOutlined />
+              }
+              className={
+                styles.searchInput
+              }
+              type="text"
+              rootClassName="owsearchInput"
             />
           </div>
 
-        </Card>
-     
+          <div
+            className={
+              styles.buttonGroup
+            }
+          >
+            <ButtonComponent
+              icon={
+                <UploadOutlined />
+              }
+            >
+              Import
+            </ButtonComponent>
+
+            <ButtonComponent
+              icon={
+                <DownloadOutlined />
+              }
+            >
+              Export
+            </ButtonComponent>
+          </div>
+        </div>
+
+        {/* GRID */}
+        <div
+          className="ag-theme-quartz procurement-aggrid"
+          style={{
+            height:
+              '300px',
+            width:
+              '100%',
+            marginTop:
+              '15px',
+          }}
+        >
+          <AgGridReact
+            rowData={rowData}
+            columnDefs={columnDefs}
+            loading={loading}
+
+            paginationPageSizeSelector={false}
+            // getRowId={(params) => params.data.id}
+            pagination={true}
+            paginationPageSize={100}
+            suppressPaginationPanel={false}
+            defaultColDef={{
+              sortable: true,
+              filter: true,
+              resizable: true,
+              flex: 1,
+              minWidth: 140,
+            }}
+          />
+
+        </div>
+      </Card>
+
+      {/* MODAL */}
+      <ModalComponent
+        customTitle="Map Customer to D365"
+        description={`Map ${selectedCustomer?.customer_name} to a D365 customer account`}
+        showModal={modalVisible}
+        setShowModal={() => {
+          setModalVisible(false)
+        }}
+        onClose={() => setModalVisible(false)}
+
+        footer={[
+          <Button key="back" onClick={() => setModalVisible(false)}>Cancel</Button>,
+          <Button key="submit" type="primary">Save Mapping</Button>,
+        ]}
+        style={{ maxWidth: '900px' }}
+      >
+        <div style={{ marginBottom: '20px' }}>
+          <Typography.Title level={5}>Mindbody Customer</Typography.Title>
+
+          <div className={styles.MappingCard}>
+            <Row gutter={16}>
+              <Col span={24}>
+                <div className={styles.MappingName}> {selectedCustomer?.customer_name}</div>
+              </Col>
+              <Col span={24}>
+                <div style={{ color: "#8a8686" }}> {selectedCustomer?.email}</div>
+              </Col>
+              <Col span={24}>
+                <div style={{ color: "#8a8686" }}> {selectedCustomer?.phone}</div>
+              </Col>
+              <Col span={24}>
+                <div style={{ color: "#8a8686" }}> {selectedCustomer?.id}</div>
+              </Col>
+            </Row>
+          </div>
+        </div>
+        <div style={{ marginBottom: '20px' }}>
+          <Typography.Title level={5}>D365 Customer Account  <span style={{ color: "red" }}>*</span></Typography.Title>
+
+          {/* <div className={styles.MappingCard}> */}
+          <InputComponent
+            type='text'
+            value={'CUST-001'}
+          />
+          {/* </div> */}
+
+          <p style={{ color: "#8a8686", paddingTop: "5px" }}>Enter the D365 customer account number</p>
+        </div>
+        <div style={{ marginBottom: '20px' }}>
+          <Typography.Title level={5}>Auto-Match Suggestions</Typography.Title>
+          <div className={styles.SuggesstionCard}>
+            <Col span={24}>
+              <div className={styles.SuggestionName}> {"CUST-AUTO-001"}</div>
+            </Col>
+            <Col span={24}>
+              <div style={{ color: "#1c398e" }}>Email Match : {selectedCustomer?.email}</div>
+            </Col>
+          </div>
+        </div>
+      </ModalComponent>
     </div>
   );
 }

@@ -3150,3 +3150,9 @@
   flex-direction: column;
   height: 100%;
 }
+.owsearchInput {
+  background: #f3f4f6  !important;
+  border: none;
+  line-height: 2;
+  width: 200%;
+}

@@ -963,17 +963,7 @@ function AppHeader({ children }: AppHeaderProps) {
     }
   }
 
-  useEffect(() => {
-    makeApiCall.get("GetAllICubeChatGroups")
-      .then((res) => setAllGroups(res.data.data))
-      .catch((err) => {
-        console.error(err);
-        return [];
-      });
-    makeApiCall.get("GetChatUser")
-      .then((res) => currentUser.current = res.data.data[0])
-      .catch((err) => console.error(err));
-  }, []);
+
 
 
 

@@ -31,17 +31,9 @@ export default function HomePage() {
     >
       <div className={styles.padd}>
         {preferredAction == "login" && (
-          <LoginForm setAction={setPreferredAction} />
+          <LoginForm />
         )}
-        {preferredAction == "register" && (
-          <RegisterCompanyForm setAction={setPreferredAction} />
-        )}
-        {preferredAction == "activated" && (
-          <ActivatedPage setAction={setPreferredAction} />
-        )}
-        {preferredAction == "forgotPassword" && (
-          <ForgotPasswordForm setAction={setPreferredAction} />
-        )}
+      
       </div>
     </div>
   );

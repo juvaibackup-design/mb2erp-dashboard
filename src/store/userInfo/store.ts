@@ -1,15 +1,15 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 export const useUserStore = create(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
-      setUser: (newState: any) => set({ user: newState }),
+      setUser: (user: any) => set({ user }),
+      clearUser: () => set({ user: null }),
     }),
     {
-      name: "user-storage", // name of the item in the storage (must be unique)
-      // storage: createJSONStorage(() => sessionStorage), // (optional) by default, 'localStorage' is used
-    }
-  )
+      name: "user-storage", // 👈 localStorage key
+    },
+  ),
 );

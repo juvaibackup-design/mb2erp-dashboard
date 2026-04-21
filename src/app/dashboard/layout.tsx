@@ -69,13 +69,7 @@ export default function RootLayout({
   const lang = useContext(TranslationContext);
 
 
-  // Dark Mode Changes - Sherin 
-  // const [theme, setTheme] = useState<"light" | "dark">("light");
-  // const [theme, setTheme] = useState<"light" | "dark">(() => {
-  //   if (localStorage && typeof localStorage != undefined)
-  //     return (localStorage.getItem("theme") as "light" | "dark") || "light";
-  //   return "light"
-  // });
+
   console.log('localStorage.getItem("theme")')
 
   const userDetails = useUserStore(
@@ -120,17 +114,7 @@ export default function RootLayout({
     }
   }, [theme]);
 
-  // Load theme from localStorage
-  // useEffect(() => {
-  //   const savedTheme = localStorage.getItem("theme") as "light" | "dark";
-  //   if (savedTheme) setTheme(savedTheme);
-  // }, []);
 
-  // Save theme to localStorage
-  // useEffect(() => {
-  //   localStorage.setItem("theme", theme);
-  // }, [theme]);
-  // Ends
 
 
   useEffect(() => {
@@ -194,36 +178,6 @@ export default function RootLayout({
   // Ends
 
 
-  // useEffect(() => {
-  //   const loadScripts = async () => {
-  //     // Load jQuery first
-  //     await new Promise((resolve) => {
-  //       const script = document.createElement("script");
-  //       script.src = "https://icube.fouz.chat/js/min/jquery.min.js";
-  //       script.onload = resolve;
-  //       document.body.appendChild(script);
-  //     });
-
-  //     // Then load main.js
-  //     await new Promise((resolve) => {
-  //       const script = document.createElement("script");
-  //       script.src = "https://icube.fouz.chat/js/main.js";
-  //       script.onload = resolve;
-  //       document.body.appendChild(script);
-  //     });
-
-  //     console.log("Scripts loaded in sequence");
-  //   };
-
-  //   setTimeout(()=>loadScripts(),5000)
-  // }, []);
-
-  // const getUserDetailsByDecodeCookie = () => {
-  //   const userEncodedData = Cookies.get("userDetails");
-  //   const userDetailsFromCookie =
-  //     userEncodedData && JSON.parse(`${userEncodedData}`);
-  //   setUser(userDetailsFromCookie?.initialData?.userInfo);
-  // };
 
   return (
     <main className={`${styles.outletHeight} ${chivo.className}`}
@@ -259,40 +213,17 @@ export default function RootLayout({
 
             <div className={styles.sidebar}>
               <SideBar
-              //  setTrackMenu={setTrackMenu} trackMenu={trackMenu}
               />
             </div>
 
 
-            {/* Dark Mode Changes - Sherin  */}
-            {/* Header + Theme switch */}
-            {/* <div style={{ flex: 1, position: "relative" }}> */}
 
-            {/* <div
-                  style={{
-                    position: "absolute",
-                    top: 120,
-                    right: 24,
-                    zIndex: 1000,
-                    insetInlineEnd: isRtl ? "auto" : 24,
-                    insetInlineStart: isRtl ? 24 : "auto",
-                  }}
-                >
-                  <Switch
-                    checked={theme === "dark"}
-                    onChange={(checked) => setTheme(checked ? "dark" : "light")}
-                  />
-                </div> */}
-            {/* Ends */}
 
 
             <AppHeader
-            //  setTrackMenu={setTrackMenu} trackMenu={trackMenu}
             >
               {children}
             </AppHeader>
-            {/* </div> */}
-            {/* above div Sherin */}
 
 
           </ConfigProvider>

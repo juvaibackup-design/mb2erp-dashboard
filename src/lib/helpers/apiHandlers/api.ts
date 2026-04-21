@@ -45,43 +45,74 @@ makeApiCall.interceptors.request.use(
 //   }
 // );
 
-makeApiCall.interceptors.response.use(
-  (response) => {
-    console.log("token", response);
-    return response;
-  },
-  async (error) => {
-    const code = error?.response?.data?.code;
-    const errordescription = error?.response?.data?.errordescription;
+// makeApiCall.interceptors.response.use(
+//   (response) => {
+//     console.log("token", response);
+//     return response;
+//   },
+//   // async (error) => {
+//   //   const code = error?.response?.data?.code;
+//   //   const errordescription = error?.response?.data?.errordescription;
 
-    if (code === 402) {
-      const event = new Event(CONSTANT.EXPIREDATE);
-      Cookies.set("expire-date", "True");
-      console.log("heree");
-      window.dispatchEvent(event);
-    } else if (
-      (code === 401 && errordescription === "Token is invalid") ||
-      errordescription === "Token is invalid"
-    ) {
-      controller.abort();
+//   //   if (code === 402) {
+//   //     const event = new Event(CONSTANT.EXPIREDATE);
+//   //     Cookies.set("expire-date", "True");
+//   //     console.log("heree");
+//   //     window.dispatchEvent(event);
+//   //   } else if (
+//   //     (code === 401 && errordescription === "Token is invalid") ||
+//   //     errordescription === "Token is invalid"
+//   //   ) {
+//   //     controller.abort();
 
-      Cookies.remove("token");
-      Cookies.remove("superToken");
+//   //     Cookies.remove("token");
+//   //     Cookies.remove("superToken");
 
-      if (typeof window !== "undefined") {
-        window.location.href = "/sessionexpired";
-      }
-    }
-    // else if (code === 402) {
-    //   const event = new Event(CONSTANT.EXPIREDATE);
-    //   Cookies.set("expire-date", "True");
-    //   console.log("heree");
-    //   window.dispatchEvent(event);
-    // }
+//   //     if (typeof window !== "undefined") {
+//   //       window.location.href = "/sessionexpired";
+//   //     }
+//   //   }
+//   //   // else if (code === 402) {
+//   //   //   const event = new Event(CONSTANT.EXPIREDATE);
+//   //   //   Cookies.set("expire-date", "True");
+//   //   //   console.log("heree");
+//   //   //   window.dispatchEvent(event);
+//   //   // }
 
-    return Promise.reject(error);
-  }
-);
+//   //   return Promise.reject(error);
+//   // }
+//   async (error) => {
+//   const token = Cookies.get("token");
+
+//   const code = error?.response?.data?.code;
+//   const errordescription = error?.response?.data?.errordescription;
+
+//   // ✅ If no token → DON'T redirect
+//   if (!token) {
+//     return Promise.reject(error);
+//   }
+
+//   // ✅ Handle expire date
+//   if (code === 402) {
+//     const event = new Event(CONSTANT.EXPIREDATE);
+//     Cookies.set("expire-date", "True");
+//     window.dispatchEvent(event);
+//   }
+
+//   // ✅ Handle invalid token ONLY if token exists
+//   else if (
+//     code === 401 &&
+//     errordescription === "Token is invalid"
+//   ) {
+//     Cookies.remove("token");
+//     Cookies.remove("superToken");
+
+//     window.location.href = "/sessionexpired";
+//   }
+
+//   return Promise.reject(error);
+// }
+// );
 
 export default makeApiCall;
 

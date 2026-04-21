@@ -12,6 +12,7 @@ import "@/lib/antdOverwrittenCss/global.css";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid
 } from 'recharts';
+import ButtonComponent from '@/components/ButtonComponent/ButtonComponent';
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
@@ -290,7 +291,7 @@ export default function Reconciliation() {
             </div>
           </div>
 
-          <Button icon={<DownloadOutlined />}>Export</Button>
+          <ButtonComponent icon={<DownloadOutlined />}>Export</ButtonComponent>
 
         </div>
 

@@ -38,7 +38,7 @@
 /* Ends */
 
 .dashboardContainer {
-  padding: 24px;
+  padding: 20px;
   background: #f9fafb;
 }
 
@@ -56,6 +56,9 @@
 /* KPI */
 .kpiCard {
   border-radius: 12px !important;
+}
+::global .kpiCard .ant-card-body {
+  padding: 15px !important;
 }
 
 .kpiTitle {
@@ -206,16 +209,19 @@
   background: #f3f4f6 !important;
   padding: 4px;
   border-radius: 18px !important;
-  margin-top: 25px !important;
+  margin-top: 15px !important;
 }
 
 /* each item */
 .customSegment :global(.ant-segmented-item) {
   border-radius: 999px !important;
-  padding: 6px 18px;
+  padding: 3px 9px;
   font-size: 14px;
 }
-
+/* each item */
+.customSegment :global(.ant-segmented-item-label) {
+  padding: 0 2px !important;
+}
 /* active item */
 .customSegment :global(.ant-segmented-item-selected) {
   background: #fff !important;
@@ -584,4 +590,48 @@
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 12px;
+}
+.MappingCard {
+  background: #f8f9fb;
+  border: none;
+  padding: 15px 22px;
+  border-radius: 12px;
+}
+.MappingName {
+  font-size: 18px;
+  font-weight: 700;
+  padding-bottom: 5px;
+}
+.SuggesstionCard {
+  background: #eff6ff;
+  border: 1px solid #bedbff;
+  padding: 15px 22px;
+  border-radius: 12px;
+}
+.SuggestionName {
+  font-size: 18px;
+  /* font-weight: 700; */
+  /* padding-bottom: 5px; */
+  text-transform: uppercase;
+  color: #1c398e;
+}
+/* Action bar layout */
+.actionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  gap: 16px;
+}
+
+/* Search should take full available space */
+.searchContainer {
+  flex: 1;
+  max-width: 500px; /* controls width like your screenshot */
+}
+
+/* Buttons stay right */
+.buttonGroup {
+  display: flex;
+  gap: 10px;
 }

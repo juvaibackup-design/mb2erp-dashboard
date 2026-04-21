@@ -54,7 +54,7 @@ export default function Home() {
     <main className={`${chivo.className}`}>
       <Flex align="center" justify="center" className={styles.mainContainer}>
         <HomePage />
-        <div className={styles.carousal}>
+        {/* <div className={styles.carousal}>
           <Carousel autoplay dots={false} waitForAnimate={true}>
             {images.map((image, index) => {
               return (
@@ -73,7 +73,7 @@ export default function Home() {
               );
             })}
           </Carousel>
-        </div>
+        </div> */}
       </Flex>
     </main>
   );
