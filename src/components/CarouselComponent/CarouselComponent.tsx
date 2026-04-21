@@ -28,9 +28,7 @@ import ModalComponent from "../ModalComponent/ModalComponent";
 import makeApiCall from "@/lib/helpers/apiHandlers/api";
 import { showAlert } from "@/lib/helpers/alert";
 import { LoaderContext } from "@/lib/interfaces/Context.interfaces";
-import MediaUpload, {
-  ImageComponent,
-} from "../MediaUploadComponent/MediaUpload";
+
 
 interface CarouselComponent {
   images: any;
@@ -530,15 +528,7 @@ const CarouselComponent = ({
           ]}
         />
       </ModalComponent> */}
-      <MediaUpload
-        ref={mediaUploadRef}
-        p_index={2}
-        showUploadModal={showUploadModal}
-        setShowUploadModal={setShowUploadModal}
-        handleAddImages={handleAddImages}
-        closeMediaModal={handleCloseModal}
-        selectionMethod={combiIndex == -1 ? "multi" : "single"}
-      />
+    
       <div
         ref={dropZoneRef}
         id="dropzone"
@@ -598,77 +588,10 @@ const CarouselComponent = ({
             <p ref={pRef}>Select Property to drop file or click to upload</p>
           </div>
         )} */}
-        {choosenImageBase64 && (
-          <ImageComponent
-            // src={`data:image/png;base64,${choosenImageBase64}`}
-            imgData={choosenImageBase64}
-            alt="iCube_Logo"
-            // className={styles.logo}
-            width={176}
-            height={176}
-            // unoptimized={true}
-            // unselectable="off"
-            // priority={true}
-            // placeholder="blur"
-            // blurDataURL="hello"
-            style={{ width: "100%", height: "100%" }}
-          />
-        )}
-        {!choosenImageBase64 && (
-          <Flex
-            justify="center"
-            align="center"
-            style={{ height: "100%", padding: 16, textAlign: "center" }}
-          >
-            {combiIndex != -1 ? (
-              <Spin />
-            ) : (
-              "Select Image to view here or click here to upload"
-            )}
-          </Flex>
-        )}
+      
+        
       </div>
-      <Flex
-        gap={8}
-        style={{
-          paddingTop: 8,
-          overflowY: "auto",
-          paddingLeft: 2,
-          paddingBottom: 2,
-        }}
-        className="custom-scroll"
-      >
-        {imageData?.map((img, index) => (
-          <div key={index} style={{ position: "relative" }}>
-            <ImageComponent
-              key={img.id}
-              // src={`data:image/png;base64,${img.image}`}
-              imgData={img.image}
-              alt="iCube_Logo"
-              className={styles.carouselImage}
-              width={64}
-              height={64}
-              // unoptimized={true}
-              // unselectable="off"
-              // priority={true}
-              // placeholder="blur"
-              // blurDataURL="hello"
-              onClick={() => handleChooseImage(index, img)}
-              style={
-                index == combiIndex
-                  ? {
-                    border: "5px solid yellow",
-                  }
-                  : {}
-              }
-            />
-            <MinusSquareOutlined
-              className={`${styles.placeTopRight} ${styles.minusButton}`}
-              onClick={() => handleRemoveCarouselImage(index)}
-            />
-          </div>
-        ))}
-      </Flex>
+    
       <div>
         <Modal
           title="Warning"

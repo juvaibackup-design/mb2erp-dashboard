@@ -1,6 +1,5 @@
 "use client";
 import LoginForm from "../signInComponents/LoginForm";
-import RegisterCompanyForm from "../RegisterCompanyComponents/RegisterCompanyForm";
 import { useEffect, useState } from "react";
 import styles from "../../rootLayout.module.css";
 import { useLoginStore } from "@/store/login/store";

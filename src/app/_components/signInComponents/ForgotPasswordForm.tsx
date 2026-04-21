@@ -16,7 +16,6 @@ import { decrypt, encrypt } from "@/lib/helpers/utilityHelpers";
 import InputPassword from "./InputPasswordComponent";
 import InputNumberComponent from "@/components/InputComponent/InputNumberComponent";
 import makeApiCall from "@/lib/helpers/apiHandlers/api";
-import DialCodeSelect from "@/components/DialCodeSelect/DialCodeSelect";
 import {
   LoaderContext,
   SideBarStateContext,

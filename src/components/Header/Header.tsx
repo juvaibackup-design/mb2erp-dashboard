@@ -11,7 +11,6 @@ import { LoaderContext, TranslationContext } from "@/lib/interfaces/Context.inte
 import useIsMobile from "@/lib/customHooks/useIsMobile";
 import { indexList } from "../SideBar/Constants";
 import { useUserStore } from "@/store/userInfo/store";
-import { localDB } from "@/store/localStorage/store";
 import { usePathname } from "next/navigation";
 
 import { Tooltip } from "antd";
@@ -136,22 +135,7 @@ const Header = ({
   }
 
   // 2) Delete ONLY Dexie rows for this screen (scoped wipe)
-  async function clearDexieForMenu(menuKey: string) {
-    if (!menuKey) return;
-    const prefix = `barcode-products-${menuKey}-`;
-
-    try {
-      // Fast path: requires an index on "key" in localDB.state
-      await localDB.state.where("key").startsWith(prefix).delete();
-    } catch {
-      // Fallback: scan & delete matched keys only (still scoped)
-      const all = await localDB.state.toArray();
-      const toDelete = all
-        .map((r: any) => r?.key)
-        .filter((k: any) => typeof k === "string" && (k.startsWith(prefix) || k.includes(`-${menuKey}-`)));
-      await Promise.all(toDelete.map((k: string) => localDB.state.delete(k)));
-    }
-  }
+ 
 
   const handleBackAndClearScopedDexie = async () => {
     const menuKey = getMenuKeyFromPath(pathname);
@@ -161,7 +145,6 @@ const Header = ({
     localStorage.removeItem("ENTIDS");
 
     try {
-      await clearDexieForMenu(menuKey);
       console.log("inn9"); // Clears ONLY this screen's Dexie cache
     } catch (e) {
       console.log("inn9");

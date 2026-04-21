@@ -12,7 +12,6 @@ import {
 } from "@/lib/interfaces/Context.interfaces";
 import { antdThemeProvider } from "@/lib/helpers/antdThemeProvider";
 import Cookies from "js-cookie";
-import jwt from "jsonwebtoken";
 import Chivo from "next/font/local";
 import { useRouter } from "next/navigation";
 import ErrorBoundary from "@/components/ErrorBoundary/ErrorBoundary";
