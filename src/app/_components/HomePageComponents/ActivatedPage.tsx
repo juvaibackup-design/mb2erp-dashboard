@@ -11,7 +11,7 @@ export default function ActivatedPage(props: any) {
   return (
     <form>
       <Flex vertical align="center">
-        <Image
+        {/* <Image
           src={"/assets/logo.png"}
           alt="iCube_Logo"
           className={styles.logo}
@@ -22,7 +22,7 @@ export default function ActivatedPage(props: any) {
           priority={true}
           placeholder="blur"
           blurDataURL={"/assets/logo.png"}
-        />
+        /> */}
         {/* <p className={styles.text}>
           Enter your username and password to continue
         </p> */}

@@ -106,7 +106,7 @@ function MobileMenu({ setTrackMenu, trackMenu }: MobileMenuProps) {
   return (
     <>
       <div className={styles.mob_logo} onClick={handleLogoClick}>
-        <Image
+        {/* <Image
           width={26}
           height={26}
           src={"/assets/icube_logo.png"}
@@ -123,7 +123,7 @@ function MobileMenu({ setTrackMenu, trackMenu }: MobileMenuProps) {
           height={15}
           unselectable="off"
           blurDataURL={"/assets/icube_font.png"}
-        />
+        /> */}
       </div>
 
       <div

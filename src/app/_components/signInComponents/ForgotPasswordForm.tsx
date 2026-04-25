@@ -392,7 +392,7 @@ const ForgotPasswordForm = (props: { setAction: (action: string) => void }) => {
       }
     >
       <Flex vertical align="center">
-        <Image
+        {/* <Image
           src={"/assets/logo.png"}
           alt="iCube_Logo"
           className={styles.logo}
@@ -403,7 +403,7 @@ const ForgotPasswordForm = (props: { setAction: (action: string) => void }) => {
           priority={true}
           placeholder="blur"
           blurDataURL={"/assets/logo.png"}
-        />
+        /> */}
         <p className={styles.text}>Enter your username and otp</p>
       </Flex>
       <div className={styles.login_form}>

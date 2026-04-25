@@ -19,9 +19,9 @@ function Loader({ size, delay, variant, className }: Partial<LoaderProps>) {
       <Spin
         size={size}
         delay={delay}
-        indicator={
-          <img src="/assets/icube_logo.png" className={styles.spinnerLogo} />
-        }
+        // indicator={
+        //   <img src="/assets/icube_logo.png" className={styles.spinnerLogo} />
+        // }
         className={styles.spinner}
       />
     </div>
