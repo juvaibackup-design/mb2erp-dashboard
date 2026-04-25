@@ -45,6 +45,7 @@ import InputComponent from '@/components/InputComponent/InputComponent';
 import ButtonComponent from '@/components/ButtonComponent/ButtonComponent';
 import { ITransactionDashboard, ITransactionLogItem, ITransactionLogResponse } from '@/lib/interfaces/transactionlog-interface/transactionloginterface';
 import makeApiCall from '@/lib/helpers/apiHandlers/api';
+import SelectComponent from '@/components/SelectComponent/SelectComponent';
 
 
 
@@ -67,6 +68,7 @@ export default function TransactionLog() {
 
   const [statusFilter, setStatusFilter] =
     useState('All');
+  const [typeFilter, setTypeFilter] = useState('All');
 
   const [tableData, setTableData] =
     useState<ITransactionLogItem[]>(
@@ -90,19 +92,21 @@ export default function TransactionLog() {
       null
     );
 
-    const [lineItems, setLineItems] = useState<any[]>([]);
-const [lineLoading, setLineLoading] = useState(false);
+  const [lineItems, setLineItems] = useState<any[]>([]);
+  const [lineLoading, setLineLoading] = useState(false);
+  const [searchText, setSearchText] = useState('');
+
   // =====================================
   // API LOAD
   // =====================================
   const loadTransaction =
-    async () => {
+    async (type: string, search = '') => {
       try {
         setLoading(true);
 
         const res =
           await makeApiCall.get(
-            '/SalesSync/GetAllSales'
+            `/SalesSync/GetAllSales?Search=${search}`
           );
 
         const response: ITransactionLogResponse =
@@ -125,42 +129,50 @@ const [lineLoading, setLineLoading] = useState(false);
       }
     };
 
+  // useEffect(() => {
+  //   loadTransaction();
+  // }, [tab]);
+
   useEffect(() => {
-    loadTransaction();
-  }, [tab]);
+    const delay = setTimeout(() => {
+      loadTransaction(tab, searchText);
+    }, 500); // wait 500ms after typing
+
+    return () => clearTimeout(delay);
+  }, [searchText, tab]);
 
   const loadSaleDetails = async (saleId: number) => {
-  try {
-    setLineLoading(true);
+    try {
+      setLineLoading(true);
 
-    const res = await makeApiCall.get(
-      `/SalesSync/GetSelectedSales?saleId=${saleId}`
-    );
+      const res = await makeApiCall.get(
+        `/SalesSync/GetSelectedSales?saleId=${saleId}`
+      );
 
-    const data = res?.data?.data || [];
+      const data = res?.data?.data || [];
 
-    setLineItems(data);
+      setLineItems(data);
 
-  } catch (error) {
-    console.log("DETAIL API ERROR", error);
-    setLineItems([]);
-  } finally {
-    setLineLoading(false);
-  }
-};
+    } catch (error) {
+      console.log("DETAIL API ERROR", error);
+      setLineItems([]);
+    } finally {
+      setLineLoading(false);
+    }
+  };
 
   // =====================================
   // FILTER DATA
   // =====================================
-  const filteredData =
-    statusFilter === 'All'
-      ? tableData
-      : tableData.filter(
-        (x) =>
-          x.status ===
-          statusFilter
-      );
+  const filteredData = tableData.filter((x) => {
+    const matchType =
+      typeFilter === 'All' || x.type === typeFilter;
 
+    const matchStatus =
+      statusFilter === 'All' || x.status === statusFilter;
+
+    return matchType && matchStatus;
+  });
   // =====================================
   // GRID COLUMN
   // =====================================
@@ -171,22 +183,55 @@ const [lineLoading, setLineLoading] = useState(false);
           headerName:
             'Sale ID',
           field: 'saleId',
+          cellRenderer: (params: any) => {
+            return <b>{params.value}</b>
+          },
         },
 
         {
-          headerName:
-            'Type',
+          headerName: 'Type',
           field: 'type',
-          cellRenderer:
-            (
-              params: any
-            ) => (
-              <Tag color="blue">
-                {
-                  params.value
-                }
-              </Tag>
-            ),
+          cellRenderer: (params: any) => {
+            const value = params.value;
+
+            let color = '#1677ff';
+            let bg = '#e6f4ff';
+
+            if (value === 'Payment') {
+              color = '#15803d';
+              bg = '#dcfce7';
+            }
+
+            if (value === 'Refund') {
+              color = '#dc2626';
+              bg = '#fee2e2';
+            }
+
+            if (value === 'Deferred Revenue') {
+              color = '#7c3aed';
+              bg = '#ede9fe';
+            }
+
+            if (value === 'Sale') {
+              color = '#2563eb';
+              bg = '#dbeafe';
+            }
+
+            return (
+              <span
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: 8,
+                  background: bg,
+                  color: color,
+                  fontSize: 12,
+                  fontWeight: 500,
+                }}
+              >
+                {value}
+              </span>
+            );
+          },
         },
 
         {
@@ -325,14 +370,14 @@ const [lineLoading, setLineLoading] = useState(false);
                   cursor:
                     'pointer',
                 }}
-               onClick={() => {
-  const row = params.data;
+                onClick={() => {
+                  const row = params.data;
 
-  setSelectedTransaction(row);
-  setModalVisible(true);
+                  setSelectedTransaction(row);
+                  setModalVisible(true);
 
-  loadSaleDetails(row.saleId); // ✅ API call
-}}
+                  loadSaleDetails(row.saleId); // ✅ API call
+                }}
               />
             ),
         },
@@ -340,6 +385,87 @@ const [lineLoading, setLineLoading] = useState(false);
       []
     );
 
+
+  const getTypeStyles = (value: string) => {
+    switch (value) {
+      case 'Payment':
+        return { color: '#15803d', bg: '#dcfce7' };
+
+      case 'Refund':
+        return { color: '#dc2626', bg: '#fee2e2' };
+
+      case 'Deferred Revenue':
+        return { color: '#7c3aed', bg: '#ede9fe' };
+
+      case 'Sale':
+        return { color: '#2563eb', bg: '#dbeafe' };
+
+      default:
+        return { color: '#1677ff', bg: '#e6f4ff' };
+    }
+  };
+
+  const getStatusStyles = (value: string) => {
+    switch (value) {
+      case 'Posted':
+        return { color: '#16a34a', bg: '#dcfce7' };
+
+      case 'Pending':
+        return { color: '#d97706', bg: '#fef3c7' };
+
+      case 'Failed':
+        return { color: '#dc2626', bg: '#fee2e2' };
+
+      case 'Blocked':
+        return { color: '#7c2d12', bg: '#ffedd5' };
+
+      default:
+        return { color: '#374151', bg: '#f3f4f6' };
+    }
+  };
+
+  const lineColumnDefs = [
+    {
+      headerName: 'Product/Service',
+      field: 'item_name',
+      valueGetter: (params: any) =>
+        params.data.item_name || params.data.item_id || '-',
+    },
+    {
+      headerName: 'Qty',
+      field: 'qty',
+    },
+    {
+      headerName: 'Unit Price',
+      field: 'unit_price',
+      valueFormatter: (params: any) =>
+        `$${Number(params.value || 0).toFixed(2)}`,
+    },
+    {
+      headerName: 'Total',
+      field: 'total_amount',
+      valueFormatter: (params: any) =>
+        `$${Number(params.value || 0).toFixed(2)}`,
+    },
+    {
+      headerName: 'Status',
+      field: 'status',
+      cellRenderer: (params: any) => (
+        <span
+          style={{
+            padding: '4px 10px',
+            borderRadius: 20,
+            background: '#ffedd5',
+            color: '#ea580c',
+            fontSize: 12,
+            fontWeight: 500,
+          }}
+        >
+          {params.value}
+        </span>
+      ),
+    },
+  ];
   return (
     <div
       className={
@@ -360,8 +486,7 @@ const [lineLoading, setLineLoading] = useState(false);
           styles.dashboardSubtitle
         }
       >
-        Monitor all synced
-        transactions
+        Monitor and manage all integration transactions
       </p>
 
       {/* TAB */}
@@ -392,147 +517,26 @@ const [lineLoading, setLineLoading] = useState(false);
       />
 
       {/* KPI */}
-      {/* <Row
-        gutter={12}
-        style={{
-          marginTop: 12,
-        }}
-      >
-        <Col span={5}>
-          <Card
-            className={
-              styles.kpiCard
-            }
-          >
-            <div
-              className={
-                styles.kpiTitle
-              }
-            >
-              Total
-            </div>
-            <div
-              className={
-                styles.kpiValue
-              }
-            >
-              {
-                dashboard.total
-              }
-            </div>
-          </Card>
-        </Col>
 
-        <Col span={5}>
-          <Card
-            className={
-              styles.kpiCard
-            }
-          >
-            <div
-              className={
-                styles.kpiTitle
-              }
-            >
-              Posted
-            </div>
-            <div
-              className={`${styles.kpiValue} ${styles.successText1}`}
-            >
-              {
-                dashboard.posted
-              }
-            </div>
-          </Card>
-        </Col>
-
-        <Col span={5}>
-          <Card
-            className={
-              styles.kpiCard
-            }
-          >
-            <div
-              className={
-                styles.kpiTitle
-              }
-            >
-              Failed
-            </div>
-            <div
-              className={`${styles.kpiValue} ${styles.failedText}`}
-            >
-              {
-                dashboard.failed
-              }
-            </div>
-          </Card>
-        </Col>
-
-        <Col span={5}>
-          <Card
-            className={
-              styles.kpiCard
-            }
-          >
-            <div
-              className={
-                styles.kpiTitle
-              }
-            >
-              Pending
-            </div>
-            <div
-              className={`${styles.kpiValue} ${styles.pendingText}`}
-            >
-              {
-                dashboard.pending
-              }
-            </div>
-          </Card>
-        </Col>
-
-        <Col span={5}>
-          <Card
-            className={
-              styles.kpiCard
-            }
-          >
-            <div
-              className={
-                styles.kpiTitle
-              }
-            >
-              Blocked
-            </div>
-            <div
-              className={`${styles.kpiValue} ${styles.failedText}`}
-            >
-              {
-                dashboard.blocked
-              }
-            </div>
-          </Card>
-        </Col>
-      </Row> */}
       <Row gutter={12} style={{ marginTop: 12 }}>
-  {[
-    { title: "Total", value: dashboard.total },
-    { title: "Posted", value: dashboard.posted, className: styles.successText1 },
-    { title: "Failed", value: dashboard.failed, className: styles.failedText },
-    { title: "Pending", value: dashboard.pending, className: styles.pendingText },
-    { title: "Blocked", value: dashboard.blocked, className: styles.failedText },
-  ].map((item, index) => (
-    <Col key={index} flex="1">
-      <Card className={styles.kpiCard}>
-        <div className={styles.kpiTitle}>{item.title}</div>
-        <div className={`${styles.kpiValue} ${item.className || ""}`}>
-          {item.value}
-        </div>
-      </Card>
-    </Col>
-  ))}
-</Row>
+        {[
+          { title: "Total", value: dashboard.total },
+          { title: "Posted", value: dashboard.posted, className: styles.successText1 },
+          { title: "Failed", value: dashboard.failed, className: styles.failedText },
+          { title: "Pending", value: dashboard.pending, className: styles.pendingText },
+          { title: "Blocked", value: dashboard.blocked, className: styles.failedText },
+        ].map((item, index) => (
+          <Col key={index} flex="1">
+            <Card className={styles.kpiCard} styles={{ body: { padding: "14px" } }}
+            >
+              <div className={styles.kpiTitle}>{item.title}</div>
+              <div className={`${styles.kpiValue} ${item.className || ""}`}>
+                {item.value}
+              </div>
+            </Card>
+          </Col>
+        ))}
+      </Row>
 
       {/* TABLE CARD */}
       <Card
@@ -541,31 +545,45 @@ const [lineLoading, setLineLoading] = useState(false);
         }
         style={{
           marginTop: 20,
+          height: "calc(100% - 220px)"
+
         }}
+        styles={{ body: { height: "100%", padding: "14px" } }}
+
       >
-        <div
-          className={
-            styles.cardTitle
-          }
-        >
-          Transactions
-        </div>
+        <div className={styles.headerRow}>
 
-        <div
-          className={
-            styles.cardSubTitle
-          }
-        >
-          View all sales sync
-          records
-        </div>
+          <div>
+            <div
+              className={
+                styles.cardTitle
+              }
+            >
+              Transactions
+            </div>
 
+            <div
+              className={
+                styles.cardSubTitle
+              }
+            >
+              View all sales sync
+              records
+            </div>
+          </div>
+          <div className={styles.headerActions}>
+            {/* <ButtonComponent icon={<UploadOutlined />}>
+              Import
+            </ButtonComponent> */}
+
+            <ButtonComponent icon={<DownloadOutlined />}>
+              Export Log
+            </ButtonComponent>
+          </div>
+        </div>
         {/* SEARCH */}
-        <div
-          className={
-            styles.actionBar
-          }
-        >
+        <div className={styles.actionBar}>
+
           <div
             className={
               styles.searchContainer
@@ -580,45 +598,38 @@ const [lineLoading, setLineLoading] = useState(false);
                 styles.searchInput
               }
               type="text"
+              rootClassName="owsearchInput"
+              value={searchText}
+              onChangeEvent={(e: any) => setSearchText(e.target.value)}
+              onKeyDown={(e: any) => {
+                if (e.key === 'Enter') {
+                  loadTransaction(tab, searchText);
+                }
+              }}
+
             />
           </div>
 
-          <div
-            className={
-              styles.buttonGroup
-            }
-          >
-            <ButtonComponent
-              icon={
-                <UploadOutlined />
-              }
-            >
-              Import
-            </ButtonComponent>
-
-            <ButtonComponent
-              icon={
-                <DownloadOutlined />
-              }
-            >
-              Export
-            </ButtonComponent>
-          </div>
+          <SelectComponent
+            value={statusFilter}
+            onChange={(val) => setStatusFilter(val)}
+            style={{ width: 250, marginTop: "20px" }}
+            options={[
+              { label: 'All Status', value: 'All' },
+              { label: 'Posted', value: 'Posted' },
+              { label: 'Failed', value: 'Failed' },
+              { label: 'Pending', value: 'Pending' },
+              { label: 'Blocked', value: 'Blocked' },
+            ]}
+          />
         </div>
-
         {/* FILTER */}
         <div
           className={
             styles.filterTabs
           }
         >
-          {[
-            'All',
-            'Posted',
-            'Failed',
-            'Pending',
-            'Blocked',
-          ].map(
+          {['All', 'Sale', 'Payment', 'Refund', 'Deferred Revenue'].map(
             (
               item
             ) => (
@@ -626,16 +637,8 @@ const [lineLoading, setLineLoading] = useState(false);
                 key={
                   item
                 }
-                onClick={() =>
-                  setStatusFilter(
-                    item
-                  )
-                }
-                className={`${styles.filterTabItem} ${statusFilter ===
-                  item
-                  ? styles.activeFilter
-                  : ''
-                  }`}
+                onClick={() => setTypeFilter(item)}
+                className={`${styles.filterTabItem} ${typeFilter === item ? styles.activeFilter : ''}`}
               >
                 {item}
               </span>
@@ -648,7 +651,7 @@ const [lineLoading, setLineLoading] = useState(false);
           className="ag-theme-quartz procurement-aggrid"
           style={{
             height:
-              '265px',
+              'calc(100% - 170px)',
             width:
               '100%',
             marginTop:
@@ -669,12 +672,14 @@ const [lineLoading, setLineLoading] = useState(false);
             // getRowId={(params) => params.data.id}
             pagination={true}
             paginationPageSize={100}
+            headerHeight={50}
+            suppressPaginationPanel={false}
             defaultColDef={{
               sortable: true,
               filter: true,
               resizable: true,
               flex: 1,
-              minWidth: 130,
+              minWidth: 140,
             }}
           />
         </div>
@@ -688,111 +693,258 @@ const [lineLoading, setLineLoading] = useState(false);
         setShowModal={() => setModalVisible(false)}
         onClose={() => setModalVisible(false)}
 
-
         footer={[
-          <Button key="close" onClick={() => setModalVisible(false)}>
-            Close
-          </Button>
+          // <Button key="close" onClick={() => setModalVisible(false)}>
+          //   Close
+          // </Button>
         ]}
-        style={{ maxWidth: '800px' }}
+        width={1000}
       >
         {selectedTransaction && (
           <div>
-            <Row gutter={[24, 16]}>
-              <Col span={12}>
-                <div><strong>Transaction Type</strong></div>
-                <Tag color="blue" style={{ borderRadius: 8, padding: "2px 10px" }}>
-                  {selectedTransaction.type}
-                </Tag>
-                <div style={{ marginTop: 12 }}>
-                  <strong>Customer</strong>
-                  <div>{selectedTransaction.customer}</div>
-                </div>
 
-                <div style={{ marginTop: 12 }}>
-                  <strong>Date/Time</strong>
-                  <div>{selectedTransaction.date}</div>
-                </div>
 
-                <div style={{ marginTop: 12 }}>
-                  <strong>Source System</strong>
-                  <div>{selectedTransaction.source}</div>
-                </div>
+            <Row gutter={[16, 14]} style={{ marginTop: 10 }}>
+              {/* Row 1 */}
+              <Col span={6}>
+                <div className={styles.label}>Customer</div>
+                <div className={styles.value}>{selectedTransaction.customer || '-'}</div>
+              </Col>
 
-                <div style={{ marginTop: 12 }}>
-                  <strong>Retry Count</strong>
-                  <div>{selectedTransaction.retry}</div>
+              <Col span={6}>
+                <div className={styles.label}>Location</div>
+                <div className={styles.value}>{selectedTransaction.location || '-'}</div>
+              </Col>
+
+              <Col span={6}>
+                <div className={styles.label}>Status</div>
+                {(() => {
+                  const style = getStatusStyles(selectedTransaction.status);
+                  return (
+                    <span style={{
+                      padding: '4px 10px',
+                      borderRadius: 20,
+                      background: style.bg,
+                      color: style.color,
+                      fontSize: 12,
+                      fontWeight: 600,
+                      display: 'inline-block',
+                    }}>
+                      {selectedTransaction.status}
+                    </span>
+                  );
+                })()}
+              </Col>
+
+              {/* Row 2 */}
+              <Col span={6}>
+                <div className={styles.label}>Transaction Type</div>
+                {(() => {
+                  const style = getTypeStyles(selectedTransaction.type);
+                  return (
+                    <span style={{
+                      padding: '4px 10px',
+                      borderRadius: 8,
+                      background: style.bg,
+                      color: style.color,
+                      fontSize: 12,
+                      fontWeight: 500,
+                      display: 'inline-block',
+                    }}>
+                      {selectedTransaction.type}
+                    </span>
+                  );
+                })()}
+              </Col>
+
+              <Col span={6}>
+                <div className={styles.label}>Date / Time</div>
+                <div className={styles.value}>{selectedTransaction.date || '-'}</div>
+              </Col>
+
+              <Col span={6}>
+                <div className={styles.label}>Total Amount</div>
+                <div className={styles.value}>
+                  ${Number(selectedTransaction.amount || 0).toFixed(2)}
                 </div>
               </Col>
 
-              <Col span={12}>
-                <div><strong>Status</strong></div>
-                <Tag color="green" style={{ borderRadius: 8, padding: "2px 10px" }}>
-                  {selectedTransaction.status}
-                </Tag>
-                <div style={{ marginTop: 12 }}>
-                  <strong>Total Amount</strong>
-                  <div>{selectedTransaction.amount}</div>
-                </div>
-
-                <div style={{ marginTop: 12 }}>
-                  <strong>Location</strong>
-                  <div>{selectedTransaction.location}</div>
-                </div>
-
-                <div style={{ marginTop: 12 }}>
-                  <strong>D365 Reference</strong>
-                  <div>{selectedTransaction.d365ref}</div>
-                </div>
+              {/* Row 3 */}
+              <Col span={6}>
+                <div className={styles.label}>D365 Reference</div>
+                <div className={styles.value}>{selectedTransaction.d365ref || '-'}</div>
               </Col>
+
+              <Col span={6}>
+                <div className={styles.label}>Retry Count</div>
+                <div className={styles.value}>{selectedTransaction.retry ?? '-'}</div>
+              </Col>
+
+              {/* <Col span={6}>
+                <div className={styles.label}>Source System</div>
+                <div className={styles.value}>
+                  {tab === 'MindBody' ? 'MindBody' : 'Foodics'}
+                </div>
+              </Col> */}
             </Row>
-            {/* Line Items */}
-            <Row style={{ marginTop: '20px' }}>
-              <div
-                style={{
-                  // marginTop: 24,
-                  // border: "1px solid #f0f0f0",
-                  borderRadius: 10,
-                  padding: 16,
-                }}
-              >
-                <strong>Line Items (1)</strong>
-
-                <Table
-                  // style={{ marginTop: 12 }}
-                 columns={[
-  {
-    title: 'Product/Service',
-    dataIndex: 'item_name',
-    render: (val, record) => val || record.item_id || '-',
-  },
-  { title: 'Qty', dataIndex: 'qty' },
-  {
-    title: 'Unit Price',
-    dataIndex: 'unit_price',
-    render: (val) => `$${Number(val || 0).toFixed(2)}`,
-  },
-  {
-    title: 'Total',
-    dataIndex: 'total_amount',
-    render: (val) => `$${Number(val || 0).toFixed(2)}`,
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    render: (status) => (
-      <Tag color="orange">{status}</Tag>
-    ),
-  },
-]}
-                 dataSource={lineItems}
-loading={lineLoading}
-                  pagination={false}
-                  rowKey="product"
-                />
+            {/* LINE ITEMS HEADER */}
+            <div style={{ marginTop: 20 }}>
+              <div className={styles.sectionTitle}>
+                {tab} ({lineItems.length})
               </div>
-            </Row>
+            </div>
+
+            {/* AG GRID */}
+            <div
+              className="ag-theme-quartz"
+              style={{
+                height: 250,
+                width: '100%',
+                marginTop: 10,
+              }}
+            >
+              <AgGridReact
+                rowData={lineItems}
+                columnDefs={lineColumnDefs}
+                loading={lineLoading}
+                defaultColDef={{
+                  flex: 1,
+                  minWidth: 120,
+                  sortable: true,
+                  filter: true,
+                  resizable: true,
+                }}
+              />
+            </div>
           </div>
+          // <div>
+          //   <Row gutter={[24, 16]}>
+          //     <Col span={8}>
+          //       <div className={styles.transactionModelNames}>Transaction Type</div>
+          //       <div style={{ borderRadius: 8, padding: "2px 10px" }}>
+          //         {(() => {
+          //           const style = getTypeStyles(selectedTransaction.type);
+
+          //           return (
+          //             <span
+          //               style={{
+          //                 padding: '4px 10px',
+          //                 borderRadius: 8,
+          //                 background: style.bg,
+          //                 color: style.color,
+          //                 fontSize: 12,
+          //                 fontWeight: 500,
+          //                 display: 'inline-block',
+          //               }}
+          //             >
+          //               {selectedTransaction.type}
+          //             </span>
+          //           );
+          //         })()}
+          //       </div>
+
+
+          //       <div style={{ marginTop: 17 }}>
+          //         <div className={styles.transactionModelNames}>Date/Time</div>
+          //         <div className={styles.modelValues}>{selectedTransaction.date}</div>
+          //       </div>
+
+          //       <div style={{ marginTop: 17 }}>
+          //         <div className={styles.transactionModelNames}>  Source System</div>
+          //         <div className={styles.modelValues}>{tab === 'MindBody' ? 'MindBody' : 'Foodics'}</div>
+          //         {/* <div>{selectedTransaction.source}</div> */}
+          //       </div>
+
+
+          //       <div style={{ marginTop: 17 }}>
+          //         <div className={styles.transactionModelNames}> Retry Count</div>
+
+          //         <div className={styles.modelValues}>{selectedTransaction.retry ?? "-"}</div>
+          //       </div>
+          //     </Col>
+
+          //     <Col span={8}>
+          //       <div className={styles.transactionModelNames}>Status</div>
+          //       <div style={{ borderRadius: 8, padding: "2px 0px" }}>
+          //         {(() => {
+          //           const style = getStatusStyles(selectedTransaction.status);
+
+          //           return (
+          //             <span
+          //               style={{
+          //                 padding: '4px 10px',
+          //                 borderRadius: 20,
+          //                 background: style.bg,
+          //                 color: style.color,
+          //                 fontSize: 12,
+          //                 fontWeight: 600,
+          //                 display: 'inline-block',
+          //               }}
+          //             >
+          //               {selectedTransaction.status}
+          //             </span>
+          //           );
+          //         })()}                </div>
+          //       <div style={{ marginTop: 17 }}>
+          //         <div className={styles.transactionModelNames}>Total Amount</div>
+
+          //         <div>{selectedTransaction.amount}</div>
+          //       </div>
+
+          //       <div style={{ marginTop: 17 }}>
+          //         <div className={styles.transactionModelNames}>Location</div>
+
+          //         <div>{selectedTransaction.location}</div>
+          //       </div>
+
+          //       <div style={{ marginTop: 17 }}>
+          //         <div className={styles.transactionModelNames}>D365 Reference</div>
+
+          //         <div>{selectedTransaction.d365ref ?? "-"}</div>
+          //       </div>
+          //     </Col>
+          //     <Col span={8}>
+          //       <div>
+          //         <div className={styles.transactionModelNames}> Customer</div>
+          //         <div className={styles.modelValues}>{selectedTransaction.customer}</div>
+          //       </div>
+          //     </Col>
+          //   </Row>
+          //   {/* Line Items */}
+          //   <div
+
+          //   >
+          //     <strong>Line Items ({lineItems.length})</strong>
+          //     <div
+          //       className="ag-theme-quartz procurement-aggrid"
+          //       style={{
+          //         height: 250,
+          //         width: '100%',
+          //         marginTop: 10,
+          //       }}
+          //     >
+          //       <AgGridReact
+          //         rowData={lineItems}
+          //         columnDefs={lineColumnDefs}
+          //         loading={lineLoading}
+          //         // domLayout="autoHeight"
+          //         paginationPageSizeSelector={false}
+          //         // getRowId={(params) => params.data.id}
+          //         pagination={true}
+          //         paginationPageSize={100}
+          //         headerHeight={50}
+          //         suppressPaginationPanel={false}
+          //         defaultColDef={{
+          //           sortable: true,
+          //           filter: true,
+          //           resizable: true,
+          //           flex: 1,
+          //           minWidth: 140,
+          //         }}
+          //       />
+          //     </div>
+          //   </div>
+          // </div>
         )}
       </ModalComponent>
     </div>

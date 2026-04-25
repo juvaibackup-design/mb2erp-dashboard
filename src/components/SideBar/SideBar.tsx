@@ -14,6 +14,10 @@ import {
   UsergroupAddOutlined,
   InboxOutlined,
   UploadOutlined,
+  CalendarOutlined,
+  CoffeeOutlined,
+  DatabaseOutlined,
+  AuditOutlined,
 } from '@ant-design/icons';
 import { useRouter, usePathname } from 'next/navigation';
 import styles from './SideBar.module.css';
@@ -39,14 +43,39 @@ export default function Sidebar() {
   // ];
 
   const menuItems = [
-  { key: '/dashboard', icon: <AppstoreOutlined />, label: 'Dashboard' },              // ✅ grid style
-  { key: '/dashboard/customermapping', icon: <UsergroupAddOutlined />, label: 'Customer Mapping' }, // ✅ group users
-  { key: '/dashboard/productmapping', icon: <InboxOutlined />, label: 'Product Mapping' }, // ✅ box icon
-  { key: '/dashboard/transactionlog', icon: <FileTextOutlined />, label: 'Transaction Log' }, // ✅ document icon
-  { key: '/dashboard/reconciliation', icon: <BarChartOutlined />, label: 'Reconciliation' }, // ✅ chart
-  { key: '/dashboard/exportimport', icon: <UploadOutlined />, label: 'Export / Import' },
-  { key: '/dashboard/settings', icon: <SettingOutlined />, label: 'Settings' },
-];
+    { key: '/dashboard', icon: <AppstoreOutlined />, label: 'Dashboard' },              // ✅ grid style
+    { key: '/dashboard/customermapping', icon: <UsergroupAddOutlined />, label: 'Customer Mapping' }, // ✅ group users
+    { key: '/dashboard/productmapping', icon: <InboxOutlined />, label: 'Product Mapping' }, // ✅ box icon
+    { key: '/dashboard/transactionlog', icon: <FileTextOutlined />, label: 'Transaction Log' }, // ✅ document icon
+    { key: '/dashboard/reconciliation', icon: <BarChartOutlined />, label: 'Reconciliation' }, // ✅ chart
+    //  {
+    //   key: '/dashboard/deferredrevenue',
+    //   icon: <CalendarOutlined />,
+    //   label: 'Deferred Revenue',
+    // },
+    //  {
+    //   key: '/dashboard/recipemanagement',
+    //   icon: <CoffeeOutlined />,
+    //   label: 'Recipe Management',
+    // },
+    // {
+    //   key: '/dashboard/ingredients',
+    //   icon: <DatabaseOutlined />,
+    //   label: 'Ingredients',
+    // },
+    { key: '/dashboard/exportimport', icon: <UploadOutlined />, label: 'Export / Import' },
+    { key: '/dashboard/settings', icon: <SettingOutlined />, label: 'Settings' },
+    //  {
+    //     key: '/dashboard/auditlogs',
+    //     icon: <AuditOutlined />,
+    //     label: 'Audit Logs',
+    //   },
+    //   {
+    //     key: '/dashboard/systemhealth',
+    //     // icon: <HeartbeatOutlined />,
+    //     label: 'System Health',
+    //   },
+  ];
 
   const [openDrawer, setOpenDrawer] = useState(false);
 

@@ -40,6 +40,7 @@ import InputComponent from '@/components/InputComponent/InputComponent';
 import ButtonComponent from '@/components/ButtonComponent/ButtonComponent';
 import makeApiCall from '@/lib/helpers/apiHandlers/api';
 import { CustomerRow, DashboardSummary } from '@/lib/interfaces/customermapping-interface/customermappinginterface';
+import SelectComponent from '@/components/SelectComponent/SelectComponent';
 
 
 /* =========================================
@@ -84,14 +85,16 @@ export default function CustomerMappingPage() {
 
   const [selectedCustomer, setSelectedCustomer] =
     useState<CustomerRow | null>(null);
+  const [statusFilter, setStatusFilter] =
+    useState('All');
+    const [searchText, setSearchText] = useState('');
 
   /* =========================================
      API LOAD FUNCTION
   ========================================= */
 
-  const loadCustomers = async (
-    type: string
-  ) => {
+ const loadCustomers = async (type: string, search = '') => {
+
     try {
       setLoading(true);
 
@@ -102,7 +105,7 @@ export default function CustomerMappingPage() {
 
       const res =
         await makeApiCall.get(
-          `Customer/GetAllCustomer?type='${apiType}'`
+      `Customer/GetAllCustomer?type='${apiType}'&search='${search}'`
         );
 
       const data = res?.data?.data;
@@ -142,24 +145,22 @@ export default function CustomerMappingPage() {
      FIRST LOAD + TAB CHANGE
   ========================================= */
 
+  // useEffect(() => {
+  //   loadCustomers(tab);
+  // }, [tab]);
+
   useEffect(() => {
-    loadCustomers(tab);
-  }, [tab]);
+  const delay = setTimeout(() => {
+    loadCustomers(tab, searchText);
+  }, 500); // wait 500ms after typing
+
+  return () => clearTimeout(delay);
+}, [searchText, tab]);
 
   /* =========================================
      GRID DATA
   ========================================= */
 
-  const rowData = tableData.map(
-    (item) => ({
-      ...item,
-      account:
-        item.d365account &&
-          item.d365account !== ''
-          ? item.d365account
-          : 'Not mapped',
-    })
-  );
 
   /* =========================================
      GRID COLUMN
@@ -169,7 +170,9 @@ export default function CustomerMappingPage() {
     () => [
       {
         headerName: 'Mindbody ID',
-        field: 'mindbody_client_id',
+        field: 'mindbody_client_id', cellRenderer: (params: any) => {
+          return <b>{params.value}</b>
+        },
       },
       {
         headerName: 'Name',
@@ -185,7 +188,26 @@ export default function CustomerMappingPage() {
       },
       {
         headerName: 'D365 Account',
-        field: 'account',
+        field: 'd365account',
+        cellRenderer: (params: any) => {
+          const value = params.value;
+
+          if (!value) {
+            return (
+              <span
+                style={{
+                  color: '#9ca3af',     // light grey
+                  fontStyle: 'italic',  // italic text
+                  fontSize: 13,
+                }}
+              >
+                Not mapped
+              </span>
+            );
+          }
+
+          return <span>{value}</span>;
+        },
       },
       {
         headerName: 'Location',
@@ -281,6 +303,16 @@ export default function CustomerMappingPage() {
      UI
   ========================================= */
 
+  const filteredData =
+    statusFilter === 'All'
+      ? tableData
+      : tableData.filter(
+        (x) => x.status === statusFilter
+      );
+
+
+
+      
   return (
     <div
       className={
@@ -345,6 +377,7 @@ export default function CustomerMappingPage() {
             className={
               styles.kpiCard
             }
+            styles={{ body: { padding: "14px" } }}
           >
             <div
               className={
@@ -371,6 +404,8 @@ export default function CustomerMappingPage() {
             className={
               styles.kpiCard
             }
+            styles={{ body: { padding: "14px" } }}
+
           >
             <div
               className={
@@ -395,6 +430,8 @@ export default function CustomerMappingPage() {
             className={
               styles.kpiCard
             }
+            styles={{ body: { padding: "14px" } }}
+
           >
             <div
               className={
@@ -419,6 +456,8 @@ export default function CustomerMappingPage() {
             className={
               styles.kpiCard
             }
+            styles={{ body: { padding: "14px" } }}
+
           >
             <div
               className={
@@ -447,33 +486,47 @@ export default function CustomerMappingPage() {
         }
         style={{
           marginTop: 20,
+          height: "calc(100% - 250px)"
         }}
+        styles={{ body: { height: "100%", padding: "14px" } }}
       >
-        <div
-          className={
-            styles.cardTitle
-          }
-        >
-          Customer List
+        {/* HEADER WITH ACTIONS */}
+        <div className={styles.headerRow}>
+          <div>
+            <div
+              className={
+                styles.cardTitle
+              }
+            >
+              Customer List
+            </div>
+
+            <div
+              className={
+                styles.cardSubTitle
+              }
+            >
+              {tab ===
+                'MindBody'
+                ? 'Manage Mindbody to D365 mappings'
+                : 'Manage Foodics to D365 mappings'}
+            </div>
+          </div>
+
+          <div className={styles.headerActions}>
+            <ButtonComponent icon={<DownloadOutlined />} >
+              Import
+            </ButtonComponent>
+
+            <ButtonComponent icon={<UploadOutlined />}>
+              Export
+            </ButtonComponent>
+          </div>
         </div>
 
-        <div
-          className={
-            styles.cardSubTitle
-          }
-        >
-          {tab ===
-            'MindBody'
-            ? 'Manage Mindbody to D365 mappings'
-            : 'Manage Foodics to D365 mappings'}
-        </div>
 
         {/* ACTION BAR */}
-        <div
-          className={
-            styles.actionBar
-          }
-        >
+        <div className={styles.actionBar}>
           <div
             className={
               styles.searchContainer
@@ -481,6 +534,7 @@ export default function CustomerMappingPage() {
           >
             <InputComponent
               placeholder="Search by name, email, or customer id..."
+
               prefix={
                 <SearchOutlined />
               }
@@ -489,38 +543,37 @@ export default function CustomerMappingPage() {
               }
               type="text"
               rootClassName="owsearchInput"
+               value={searchText}
+  onChangeEvent={(e: any) => setSearchText(e.target.value)}
+  onKeyDown={(e: any) => {
+  if (e.key === 'Enter') {
+    loadCustomers(tab, searchText);
+  }
+}}
             />
           </div>
 
-          <div
-            className={
-              styles.buttonGroup
-            }
-          >
-            <ButtonComponent
-              icon={
-                <UploadOutlined />
-              }
-            >
-              Import
-            </ButtonComponent>
-
-            <ButtonComponent
-              icon={
-                <DownloadOutlined />
-              }
-            >
-              Export
-            </ButtonComponent>
-          </div>
+          <SelectComponent
+            value={statusFilter}
+            onChange={(val) => setStatusFilter(val)}
+            style={{ width: 250, marginTop: "20px" }}
+            options={[
+              { label: 'All Status', value: 'All' },
+              { label: 'Posted', value: 'Posted' },
+              { label: 'Failed', value: 'Failed' },
+              { label: 'Pending', value: 'Pending' },
+              { label: 'Blocked', value: 'Blocked' },
+            ]}
+          />
         </div>
+
 
         {/* GRID */}
         <div
           className="ag-theme-quartz procurement-aggrid"
           style={{
             height:
-              '300px',
+              'calc(100% - 112px)',
             width:
               '100%',
             marginTop:
@@ -528,7 +581,7 @@ export default function CustomerMappingPage() {
           }}
         >
           <AgGridReact
-            rowData={rowData}
+            rowData={filteredData}
             columnDefs={columnDefs}
             loading={loading}
 
@@ -536,6 +589,7 @@ export default function CustomerMappingPage() {
             // getRowId={(params) => params.data.id}
             pagination={true}
             paginationPageSize={100}
+            headerHeight={50}
             suppressPaginationPanel={false}
             defaultColDef={{
               sortable: true,
@@ -591,7 +645,7 @@ export default function CustomerMappingPage() {
           {/* <div className={styles.MappingCard}> */}
           <InputComponent
             type='text'
-            value={'CUST-001'}
+            value={selectedCustomer?.d365account}
           />
           {/* </div> */}
 
@@ -601,7 +655,7 @@ export default function CustomerMappingPage() {
           <Typography.Title level={5}>Auto-Match Suggestions</Typography.Title>
           <div className={styles.SuggesstionCard}>
             <Col span={24}>
-              <div className={styles.SuggestionName}> {"CUST-AUTO-001"}</div>
+              <div className={styles.SuggestionName}> {selectedCustomer?.d365account}</div>
             </Col>
             <Col span={24}>
               <div style={{ color: "#1c398e" }}>Email Match : {selectedCustomer?.email}</div>

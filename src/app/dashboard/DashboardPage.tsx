@@ -20,7 +20,20 @@ const DashboardPage = (initialData: any) => {
 
 
   const { Title, Text } = Typography;
+  const router = useRouter();
+  const [authorized, setAuthorized] = useState(false);
 
+  useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      router.replace("/"); // redirect to login
+    } else {
+      setAuthorized(true);
+    }
+  }, []);
+
+  if (!authorized) return null; // or loader
   const lineData = [
     { name: 'Feb 13', total: 35, posted: 20, failed: 15 },
     { name: 'Feb 14', total: 50, posted: 35, failed: 15 },

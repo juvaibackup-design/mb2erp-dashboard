@@ -40,6 +40,7 @@
 .dashboardContainer {
   padding: 20px;
   background: #f9fafb;
+  height: 100%;
 }
 
 /* HEADER */
@@ -62,7 +63,7 @@
 }
 
 .kpiTitle {
-  font-size: 17px;
+  font-size: 14px;
   color: #6b7280;
 }
 
@@ -98,12 +99,12 @@
 }
 
 .cardTitle {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .cardSubTitle {
-  font-size: 17px;
+  font-size: 14px;
   color: #6b7280;
 }
 
@@ -620,18 +621,90 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   gap: 16px;
 }
 
 /* Search should take full available space */
 .searchContainer {
   flex: 1;
-  max-width: 500px; /* controls width like your screenshot */
+  margin-top: 20px;
+  /* max-width: 500px;  */
 }
 
 /* Buttons stay right */
 .buttonGroup {
   display: flex;
   gap: 10px;
+}
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerActions {
+  display: flex;
+  gap: 10px;
+}
+.transactionModelNames {
+  font-size: 16px;
+  color: #364153;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.modelValues {
+  font-size: 15px;
+  color: #101828;
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modalSubTitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 2px;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label {
+  width: 140px; /* important for alignment */
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.colon {
+  width: 10px;
+}
+
+.value {
+  /* font-weight: 500; */
+  color: #101828;
+  font-size: 14px;
 }

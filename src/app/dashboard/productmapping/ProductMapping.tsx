@@ -14,6 +14,7 @@ import ButtonComponent from '@/components/ButtonComponent/ButtonComponent';
 import { SetFilterModule } from 'ag-grid-enterprise';
 import { Product, ProductDashboard } from '@/lib/interfaces/productmapping-interface/productmappinginterface';
 import makeApiCall from '@/lib/helpers/apiHandlers/api';
+import SelectComponent from '@/components/SelectComponent/SelectComponent';
 
 /* =========================================
    AG GRID MODULES
@@ -42,11 +43,11 @@ export default function ProductMappingPage() {
     blockedDuplicate: 0,
   });
   const [tableData, setTableData] = useState<Product[]>([]);
+  const [searchText, setSearchText] = useState('');
 
 
-  const loadCustomers = async (
-    type: string
-  ) => {
+  const loadCustomers = async (type: string, search = '') => {
+
     try {
       setLoading(true);
 
@@ -57,7 +58,7 @@ export default function ProductMappingPage() {
 
       const res =
         await makeApiCall.get(
-          `ProductMapping/GetProductList`
+          `ProductMapping/GetProductList?Search=${search}`
         );
 
       const data = res?.data?.data;
@@ -93,15 +94,25 @@ export default function ProductMappingPage() {
     }
   };
 
+  // useEffect(() => {
+  //   loadCustomers(tab);
+  // }, [tab]);
+
   useEffect(() => {
-    loadCustomers(tab);
-  }, [tab]);
+    const delay = setTimeout(() => {
+      loadCustomers(tab, searchText);
+    }, 500); // wait 500ms after typing
 
-
+    return () => clearTimeout(delay);
+  }, [searchText, tab]);
 
   // ✅ Common Column Definition
   const columnDefs: any = useMemo(() => [
-    { headerName: 'Mindbody ID', field: 'mindBodyId' }, // ✅ FIXED
+    {
+      headerName: 'Mindbody ID', field: 'mindBodyId', cellRenderer: (params: any) => {
+        return <b>{params.value}</b>
+      },
+    }, // ✅ FIXED
     { headerName: 'Name', field: 'name' },
 
     {
@@ -113,7 +124,7 @@ export default function ProductMappingPage() {
 
         switch (value) {
           case 'Membership': color = 'purple'; break;
-          case 'Service': color = 'blue'; break;
+          case 'Product': color = 'blue'; break;
           case 'Retail': color = 'green'; break;
           case 'Package': color = 'orange'; break;
           default: color = 'grey';
@@ -123,7 +134,27 @@ export default function ProductMappingPage() {
       }
     },
 
-    { headerName: 'D365 Item ID', field: 'd365ItemId' }, // ✅ FIXED
+    {
+      headerName: 'D365 Item ID', field: 'd365ItemId', cellRenderer: (params: any) => {
+        const value = params.value;
+
+        if (!value) {
+          return (
+            <span
+              style={{
+                color: '#9ca3af',     // light grey
+                fontStyle: 'italic',  // italic text
+                fontSize: 13,
+              }}
+            >
+              Not mapped
+            </span>
+          );
+        }
+
+        return <span>{value}</span>;
+      },
+    }, // ✅ FIXED
 
     { headerName: 'Location', field: 'location' },
 
@@ -176,24 +207,18 @@ export default function ProductMappingPage() {
     },
   ], []);
 
+  const [statusFilter, setStatusFilter] =
+    useState('All');
+
   // ✅ Data for both tabs
-  const mindbodyData = [
-    { id: 'MB-PROD-001', name: 'Monthly Membership - Premium', type: 'Membership', itemid: 'ITEM-MEM-001', location: 'Downtown', status: 'Mapped' },
-    { id: 'MB-PROD-002', name: 'Personal Training Session', type: 'Service', itemid: 'ITEM-SRV-002', location: 'Uptown', status: 'Mapped' },
-    { id: 'MB-PROD-003', name: 'Yoga Mat - Premium', type: 'Retail', itemid: 'Not mapped', location: 'Downtown', status: 'Pending' },
-    { id: 'MB-PROD-004', name: '10 Session Package', type: 'Package', itemid: 'ITEM-PKG-004', location: 'Midtown', status: 'Duplicate' },
-  ];
 
-  const foodicsData = [
-    { id: 'FD-20001', name: 'Ali', email: 'ali@email.com', phone: '999999', account: 'CUST-010', location: 'Riyadh', status: 'Mapped' },
-  ];
 
-  const rowData = tab === 'MindBody' ? mindbodyData : foodicsData;
+
   const getTagColor = (type: any) => {
     switch (type) {
       case 'Membership':
         return 'purple';
-      case 'Service':
+      case 'Product':
         return 'blue';
       case 'Retail':
         return 'green';
@@ -203,6 +228,13 @@ export default function ProductMappingPage() {
         return 'default'; // Fallback color
     }
   };
+  const filteredData =
+    statusFilter === 'All'
+      ? tableData
+      : tableData.filter(
+        (x) => x.status === statusFilter
+      );
+
   return (
     <div className={styles.dashboardContainer}>
 
@@ -226,14 +258,16 @@ export default function ProductMappingPage() {
       <Row gutter={16} style={{ marginTop: 20 }}>
 
         <Col span={6}>
-          <Card className={styles.kpiCard}>
+          <Card className={styles.kpiCard} styles={{ body: { padding: "14px" } }}
+          >
             <div className={styles.kpiTitle}>Total Products</div>
             <div className={styles.kpiValue}>{dashboard.totalProducts}</div>
           </Card>
         </Col>
 
         <Col span={6}>
-          <Card className={styles.kpiCard}>
+          <Card className={styles.kpiCard} styles={{ body: { padding: "14px" } }}
+          >
             <div className={styles.kpiTitle}>Mapped</div>
             <div className={`${styles.kpiValue} ${styles.successText1}`}>
               {dashboard.mapped}
@@ -242,7 +276,8 @@ export default function ProductMappingPage() {
         </Col>
 
         <Col span={6}>
-          <Card className={styles.kpiCard}>
+          <Card className={styles.kpiCard} styles={{ body: { padding: "14px" } }}
+          >
             <div className={styles.kpiTitle}>Pending Review</div>
             <div className={`${styles.kpiValue} ${styles.pendingText}`}>  {dashboard.pendingReview}</div>
 
@@ -250,7 +285,8 @@ export default function ProductMappingPage() {
         </Col>
 
         <Col span={6}>
-          <Card className={styles.kpiCard}>
+          <Card className={styles.kpiCard} styles={{ body: { padding: "14px" } }}
+          >
             <div className={styles.kpiTitle}>Blocked/Duplicate</div>
             <div className={`${styles.kpiValue} ${styles.failedText}`}>
               {dashboard.blockedDuplicate}
@@ -264,12 +300,29 @@ export default function ProductMappingPage() {
 
 
 
-      <Card className={styles.customCard} style={{ marginTop: 20 }}>
+      <Card className={styles.customCard} style={{
+        marginTop: 20,
+        height: "calc(100% - 250px)"
+      }} styles={{ body: { height: "100%", padding: "14px" } }}
+      >
 
         {/* HEADER */}
-        <div className={styles.cardTitle}>Product/Service List</div>
-        <div className={styles.cardSubTitle}>
-          {tab === 'MindBody' ? "Manage Mindbody to D365 item  mappings" : "Manage Foodics to D365 item  mappings"}
+        <div className={styles.headerRow}>
+          <div>
+            <div className={styles.cardTitle}>Product/Service List</div>
+            <div className={styles.cardSubTitle}>
+              {tab === 'MindBody' ? "Manage Mindbody to D365 item  mappings" : "Manage Foodics to D365 item  mappings"}
+            </div>
+          </div>
+          <div className={styles.headerActions}>
+            <ButtonComponent icon={<DownloadOutlined />} >
+              Import
+            </ButtonComponent>
+
+            <ButtonComponent icon={<UploadOutlined />}>
+              Export
+            </ButtonComponent>
+          </div>
         </div>
 
         {/* ACTION BAR */}
@@ -281,45 +334,64 @@ export default function ProductMappingPage() {
               className={styles.searchInput}
               type='text'
               rootClassName='owsearchInput'
+              value={searchText}
+              onChangeEvent={(e: any) => setSearchText(e.target.value)}
+              onKeyDown={(e: any) => {
+                if (e.key === 'Enter') {
+                  loadCustomers(tab, searchText);
+                }
+              }}
 
             />
           </div>
 
-          <div className={styles.buttonGroup}>
-            <ButtonComponent icon={<UploadOutlined />}>Import</ButtonComponent>
-            <ButtonComponent icon={<DownloadOutlined />}>Export</ButtonComponent>
-          </div>
+          <SelectComponent
+            value={statusFilter}
+            onChange={(val) => setStatusFilter(val)}
+            style={{ width: 250, marginTop: "20px" }}
+            options={[
+              { label: 'All Status', value: 'All' },
+              { label: 'Posted', value: 'Posted' },
+              { label: 'Failed', value: 'Failed' },
+              { label: 'Pending', value: 'Pending' },
+              { label: 'Blocked', value: 'Blocked' },
+            ]}
+          />
         </div>
 
 
         {/* TABLE */}
-        <div className="ag-theme-quartz procurement-aggrid" style={{ height: "300px", width: '100%', marginTop: "15px" }} onContextMenu={() => false}>
+        <div className="ag-theme-quartz procurement-aggrid" style={{ height: 'calc(100% - 112px)', width: '100%', marginTop: "15px" }} onContextMenu={() => false}>
 
           <AgGridReact
-            rowData={tableData}   // ✅ FIXED
+            rowData={filteredData}   // ✅ FIXED
             columnDefs={columnDefs}
-            selectionColumnDef={{
-              pinned: "left",        // ✅ keep checkbox column fixed on the left
-              width: 50,
-              lockPosition: true,
-              sortable: false,
-              resizable: false,
-            }}
+            // selectionColumnDef={{
+            //   pinned: "left",        // ✅ keep checkbox column fixed on the left
+            //   width: 50,
+            //   lockPosition: true,
+            //   sortable: false,
+            //   resizable: false,
+            // }}
+            loading={loading}
+
             paginationPageSizeSelector={false}
             // getRowId={(params) => params.data.id}
             pagination={true}
             paginationPageSize={100}
+            suppressPaginationPanel={false}
 
-            className="ag-theme-quartz"
             defaultColDef={{
               sortable: true,
               filter: true,
               resizable: true,
+              flex: 1,
+              minWidth: 140,
             }}
           />
         </div>
 
-      </Card>
+      </Card >
       <ModalComponent
         customTitle="Map Product  to D365"
         description={`Map ${selectedCustomer?.name} to a D365 item/service code`}
@@ -336,7 +408,7 @@ export default function ProductMappingPage() {
         style={{ maxWidth: '900px' }}
       >
         <div style={{ marginBottom: '20px' }}>
-          <Typography.Title level={5}>Mindbody Customer</Typography.Title>
+          <Typography.Title level={5}>Mindbody Product</Typography.Title>
 
           <div className={styles.MappingCard}>
             <Row gutter={16}>
@@ -352,22 +424,22 @@ export default function ProductMappingPage() {
                 {/* <div style={{ color: "#8a8686" }}> {selectedCustomer?.}</div> */}
               </Col>
               <Col span={24}>
-                <div style={{ color: "#8a8686" }}> {selectedCustomer?.id}</div>
+                <div style={{ color: "#8a8686" }}> ID : {selectedCustomer?.mindBodyId}</div>
               </Col>
             </Row>
           </div>
         </div>
         <div style={{ marginBottom: '20px' }}>
-          <Typography.Title level={5}>D365 Customer Account  <span style={{ color: "red" }}>*</span></Typography.Title>
+          <Typography.Title level={5}>D365 Item/Service Code  <span style={{ color: "red" }}>*</span></Typography.Title>
 
           {/* <div className={styles.MappingCard}> */}
           <InputComponent
             type='text'
-            value={'ITEM-MEM-001'}
+            value={selectedCustomer?.d365ItemId}
           />
           {/* </div> */}
 
-          <p style={{ color: "#8a8686", paddingTop: "5px" }}>Enter the D365 customer account number</p>
+          <p style={{ color: "#8a8686", paddingTop: "5px" }}>Enter the D365 item or service code</p>
         </div>
         <div style={{ marginBottom: '20px' }}>
           <Typography.Title level={5}>Suggessted Mappings</Typography.Title>
@@ -381,6 +453,6 @@ export default function ProductMappingPage() {
           </div>
         </div>
       </ModalComponent>
-    </div>
+    </div >
   );
 }

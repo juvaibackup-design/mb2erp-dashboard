@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Card, Input, Button, Switch } from 'antd';
+import { Card, Input, Button, Switch, message } from 'antd';
 import {
   ReloadOutlined,
   CheckCircleOutlined
@@ -71,6 +71,7 @@ export default function Settings() {
         );
 
         console.log("SAVE RESPONSE:", res.data);
+            message.success("Settings saved successfully ✅");
 
       } catch (err) {
         console.error("SAVE ERROR:", err);

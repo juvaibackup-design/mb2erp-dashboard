@@ -48,12 +48,13 @@ export default function LoginPage() {
 
         if (token) {
           Cookies.set('token', token, { expires: 1 });
+          setUser(JSON.stringify(userData));
+
+          router.push('/dashboard');
         }
-        Cookies.set('token', token, { expires: 1 });
+        // Cookies.set('token', token, { expires: 1 });
 
-        setUser(JSON.stringify(userData));
 
-        router.push('/dashboard');
 
       } catch (error: any) {
         // alert(
